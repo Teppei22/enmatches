@@ -13,7 +13,7 @@ import eslint from 'gulp-eslint';
 // gulpタスクの作成
 function js_build() {
   return gulp
-  .src('./resources/js/app.js',{
+  .src('./resources/js/app.js', {
     sourcemaps: true
   })
   .pipe(plumber({

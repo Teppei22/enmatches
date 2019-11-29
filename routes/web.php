@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/works/new', 'WorksController@new')->name('works.new');
+    Route::post('/works/new', 'WorksController@create')->name('works.create');
+});
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

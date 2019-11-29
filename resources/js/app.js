@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+require('./assets/works_new.js'); 
+
 
 import Vue from 'vue';
 
