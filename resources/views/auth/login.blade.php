@@ -3,7 +3,7 @@
 @section('content')
 <div class="p-register">
     <div class="p-register__container">
-        <div class="p-register__header"><h1>{{ __('Login') }}</h1></div>
+        <div class="p-register__header l-header"><h1>{{ __('Login') }}</h1></div>
         <div class="p-register__contents">
             <div class="p-form__section">
                 <div class="card-body">

@@ -1,0 +1,33 @@
+.c-work{
+  &-list{
+    padding-top: 20px;
+    width: 400px;
+    margin: 0 auto;
+    &__item{
+      border: 1px solid $gray;
+      margin: 10px;
+    }
+  }
+  &__content{
+    padding: 5px 10px;
+  }
+  &__title{
+    font-size: 17px;
+    font-weight: bold;
+    color: $dark-blue;
+  }
+  &__type{
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  &__price{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  &__status{
+    display: inline-block;
+    display: flex;
+    justify-content: space-between;
+  }
+}

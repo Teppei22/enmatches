@@ -16,6 +16,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
     <header>
@@ -41,7 +44,7 @@
                                     <a href="">{{ Auth::user()->name }}</a>
                                 </li>
                                 <li>
-                                    <a href="">new</a>
+                                    <a href="{{ route('works.new') }}">new</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('logout') }}"
@@ -75,7 +78,5 @@
         Copyright © EnMatches All Rights Reserved.
     </footer>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

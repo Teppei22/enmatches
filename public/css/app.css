@@ -55,6 +55,12 @@ table {
 * {
   box-sizing: border-box; }
 
+.l-header {
+  font-weight: 700;
+  font-size: 25px;
+  margin: 30px;
+  text-align: center; }
+
 .c-btn {
   display: block;
   font-size: 15px; }
@@ -80,6 +86,36 @@ table {
 
 .c-dialog--err {
   color: #e3342f; }
+
+.c-work-list {
+  padding-top: 20px;
+  width: 400px;
+  margin: 0 auto; }
+  .c-work-list__item {
+    border: 1px solid #cccccc;
+    margin: 10px; }
+
+.c-work__content {
+  padding: 5px 10px; }
+
+.c-work__title {
+  font-size: 17px;
+  font-weight: bold;
+  color: #124a77; }
+
+.c-work__type {
+  font-size: 14px;
+  margin-top: 5px; }
+
+.c-work__price {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0; }
+
+.c-work__status {
+  display: inline-block;
+  display: flex;
+  justify-content: space-between; }
 
 .p-form__section {
   padding: 10px 25px; }
@@ -128,12 +164,9 @@ table {
   max-width: 520px;
   margin: 0 auto; }
 
-.p-register__header {
-  font-weight: 700;
-  font-size: 20px;
-  margin: 25px;
-  text-align: center; }
-
 .p-register__contents {
   background: #fff;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+
+.p-works__contents {
+  background: #fff; }

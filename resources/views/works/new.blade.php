@@ -3,7 +3,7 @@
 @section('content')
     <div class="p-register">
         <div class="p-register__container">
-            <div class="p-register__header"><h1>{{ __('Work Register') }}</h1></div>
+            <div class="p-register__header l-header"><h1>{{ __('Work Register') }}</h1></div>
             <div class="p-register__contents">
             <div class="p-form__section">
                 <div class="card-body">
@@ -28,9 +28,10 @@
                             <label for="type" class="p-form__title">{{ __('Work Type') }}</label>
 
                             <div class="p-form__content">
-                                <select name="type" class="p-form__input--select js-type_select @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}" autofocus>
-                                    <option value="1">個人開発</option>
-                                    <option value="2">レベニューシェア</option>
+                                <select name="type_id" class="p-form__input--select js-type_select @error('type_id') is-invalid @enderror" value="{{ old('type_id') }}" autofocus>
+                                    @foreach ($work_types as $key => $val)
+                                        <option value="{{ $val["id"] }}">{{ $val["name"] }}</option>
+                                    @endforeach
                                 </select>
 
                                 @error('type')

@@ -30,20 +30,20 @@ class WorkRequest extends FormRequest
         
         return [
             'title' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'single_price_min' => ['required_if:type,1','nullable','integer','min:1000',
+            'type_id' => 'required|string|max:255',
+            'single_price_min' => ['required_if:type_id,1','nullable','integer','min:1000',
                 function($attribute, $value, $fail) {
                     if($value % 1000 !== 0){
                         return $fail($this->attributes()[$attribute].'は1000円単位で入力してください。');
                     }
                 }],
-            'single_price_max' => ['required_if:type,1','nullable','integer','gte:single_price_min',
+            'single_price_max' => ['required_if:type_id,1','nullable','integer','gte:single_price_min',
                 function($attribute, $value, $fail) {
                     if($value % 1000 !== 0){
                         return $fail($this->attributes()[$attribute].'は1000円単位で入力してください。');
                     }
                 }],
-            'revenue_share_price' => ['required_if:type,2','nullable','integer','min:1000',
+            'revenue_share_price' => ['required_if:type_id,2','nullable','integer','min:1000',
                 function($attribute, $value, $fail) {
                     if($value % 1000 !== 0){
                         return $fail($this->attributes()[$attribute].'は1000円単位で入力してください。');
