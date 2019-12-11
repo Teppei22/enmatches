@@ -5,7 +5,10 @@
  */
 
 require('./bootstrap');
-require('./assets/works_new.js'); 
+
+require('./assets/fix_footer');
+require('./assets/works_new'); 
+require('./assets/live_preview_img'); 
 
 
 import Vue from 'vue';
