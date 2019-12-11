@@ -79,7 +79,7 @@
                             <label for="detail" class="p-form__title">{{ __('Work Detail') }}</label>
 
                             <div class="p-form__content">
-                                <textarea id="detail" type="text" placeholder="お仕事の説明(1000文字以内)" class="p-form__input--text @error('detail') is-invalid @enderror" name="detail" autofocus>
+                                <textarea id="detail" type="text" placeholder="お仕事の説明(1000文字以内)" class="p-form__input--textarea @error('detail') is-invalid @enderror" name="detail" autofocus>
                                     {{old('detail')}}
                                 </textarea>
                                 @error('detail')

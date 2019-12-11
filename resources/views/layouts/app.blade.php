@@ -74,7 +74,7 @@
             @yield('content')
         </main>
     </div>
-    <footer>
+    <footer class="p-footer js-fix-footer">
         Copyright © EnMatches All Rights Reserved.
     </footer>
 

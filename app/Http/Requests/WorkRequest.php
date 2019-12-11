@@ -53,15 +53,15 @@ class WorkRequest extends FormRequest
         ];
     }
 
-    public function attributes() {
-        return [
-            'title' => 'お仕事名',
-            'single_price_min' => '下限金額',
-            'single_price_max' => '上限金額',
-            'revenue_share_price' => '固定単価',
-            'detail' => 'お仕事詳細'
-        ];
-    }
+    // public function attributes() {
+    //     return [
+    //         'title' => 'お仕事名',
+    //         'single_price_min' => '下限金額',
+    //         'single_price_max' => '上限金額',
+    //         'revenue_share_price' => '固定単価',
+    //         'detail' => 'お仕事詳細'
+    //     ];
+    // }
 
     // public function messages()
     // {

@@ -143,6 +143,17 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        // profilerequest
+        'name' => '名前',
+        'thumbnail' => 'サムネイル画像',
+        'description' => '技術詳細',
+        // workrequest
+        'title' => 'お仕事名',
+        'single_price_min' => '下限金額',
+        'single_price_max' => '上限金額',
+        'revenue_share_price' => '固定単価',
+        'detail' => 'お仕事詳細'
+    ],
 
 ];

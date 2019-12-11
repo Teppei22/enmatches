@@ -19,8 +19,7 @@
         </div>
         <div class="c-work__status">
           <div>
-            <span>提案数:{{  }}
-            </span>
+            <span>提案数:{{  }}</span>
           </div>
           <div>
             {{ user.name }}
