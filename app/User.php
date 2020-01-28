@@ -2,7 +2,11 @@
 
 namespace App;
 
+use App\Work;
+use Illuminate\Support\Facades\Log;
+use App\Notifications\SendApplication;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\CustomResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -36,4 +40,40 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * パスワード再設定メールの送信
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomResetPassword($token));
+    }
+
+    /**
+     * 応募後の案件投稿者への通知メールの送信
+     *
+     * @param  App\User  $apply_user
+     * @param App\Work $work
+     * @return void
+     */
+    public function sendApplicationNotification($apply_user, $work)
+    {
+        $this->notify(new SendApplication($apply_user, $work));
+    }
+
+    // ユーザが投稿する案件
+    public function postedWorks()
+    {
+        return $this->hasMany('App\Work');
+
+    }
+
+    // ユーザが応募する案件
+    public function appliedWorks()
+    {
+        return $this->belongsToMany('App\Work')->withTimestamps();
+    }
 }

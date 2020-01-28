@@ -11,6 +11,11 @@
   $value: 200px;
   &__content{
     margin-top: 8px;
+    &--btn{
+      button{
+        margin: 0 auto;
+      }
+    }
     &--img{
       display: block;
       height: $value;
@@ -20,6 +25,7 @@
       text-align: center;
       margin: 0 auto;
       overflow: hidden;
+      background: $gray;
       border-radius: $value;
       -webkit-border-radius: $value;
       -moz-border-radius: $value;
@@ -41,13 +47,23 @@
     width: 100%;
     height: 45px;
     padding: 10px 16px;
-    font-size: 16px;
+    font-size: 20px;
+    &-show{
+      text-align: center;
+      font-weight: bold;
+    }
   }
   &--textarea{
     width: 100%;
-    height: 150px;
+    min-height: 150px;
     padding: 10px 16px;
     font-size: 16px;
+    &-show{
+      border: 3px $gray-dark solid;
+      &--empty{
+        color: $gray;
+      }
+    }
   }
   &--file{
     opacity: 0;
@@ -67,8 +83,12 @@
     
   }
 }
-  
-  // &__remember{
-
-  // }
+  &__note{
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 }

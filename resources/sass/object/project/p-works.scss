@@ -2,8 +2,74 @@
   &__contents{
     background: $white;
   }
-  
-  &__header{
-    
+  &__search{
+    padding-top: 10px;
+    padding-left: 10px;
+    &__tools{
+      margin: 10px 0;
+      &__title{
+        font-weight: bold;
+        padding: 5px 0;
+      }
+      &__search-btn{
+        padding-top: 10px;
+        display: flex;
+        justify-content: center;
+      }
+      input[type=text],input[type=number]{
+        height: 30px;
+        font-size: 16px;
+        padding: 5px;
+      }
+    }
+    &__price{
+      &__number{
+        margin-top: 5px;
+      }
+    }
+    &__keyword{
+      display: flex;
+      justify-content: center;
+      &__text{
+        width: 60%;
+        border-right: none;
+      }
+      &__btn{
+        color: $white;
+        background: $blue;
+        margin-left: 0;
+        height: 30px;
+      }
+    }
+    &__link{
+      text-align: center;
+      color: $gray;
+      a{
+        padding: 5px 10px;
+        border: 1px solid $gray;
+        height: 26px;
+        border-radius: 26px;
+        -webkit-border-radius: 26px;
+        -moz-border-radius: 26px;
+        -ms-border-radius: 26px;
+        -o-border-radius: 26px;
+      }
+      
+    }
+  }
+  &__list{
+    margin-top: 10px;
+    &--empty{
+      text-align: center;
+      height: 200px;
+      position: relative;
+      &__description{
+        font-weight: bold;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+
+      }
+    }
   }
 }

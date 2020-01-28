@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class WorksTableSeeder extends Seeder
@@ -20,7 +21,9 @@ class WorksTableSeeder extends Seeder
                     'single_price_min' => 10000,
                     'single_price_max' => 20000,
                     'user_id' => rand(1,10),
-                    'detail' => 'detaildetaildetaildetaildetaildetaildetail'
+                    'detail' => 'detaildetaildetaildetaildetaildetaildetail',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
                 ]);
             }else if($type_id === 2){
                 DB::table('works')->insert([
@@ -28,7 +31,9 @@ class WorksTableSeeder extends Seeder
                     'type_id' => $type_id,
                     'revenue_share_price' => 50000,
                     'user_id' => rand(1,10),
-                    'detail' => 'detaildetaildetaildetaildetaildetaildetail'
+                    'detail' => 'detaildetaildetaildetaildetaildetaildetail',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
                 ]);
             }
             

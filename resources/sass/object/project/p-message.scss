@@ -1,0 +1,20 @@
+.p-message{
+  background: $white;
+  &__header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__link-index{
+    // margin-left: 0;
+  }
+  &__title{
+    margin: 0 auto;
+  }
+  &__destination{
+    margin-top: 20px;
+    margin-left: 0;
+    font-weight: bold;
+    font-size: 20px;
+  }
+}
