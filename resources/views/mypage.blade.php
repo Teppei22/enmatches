@@ -125,58 +125,7 @@
             </div>
         </section>
 
-        {{--  <section class="p-mypage__tab">
-            <ul class="c-tab js-tab_labels">
-                <li class="js-tab_label c-tab__label is-active">
-                    <h3>パブリックメッセージ</h3>
-                </li>
-                <li class="js-tab_label c-tab__label">
-                    <h3>ダイレクトメッセージ</h3>
-                </li>
-            </ul>
-            <div class="c-tab__content p-mypage__tabContent js-tab_panels">
-                <ul class="c-tab__panel is-active js-tab_panel">
-                    @if ($posted_works->count() === 0)
-                        <li class="c-tab__panel-item-not-found">
-                            まだパブリックメッセージはありません
-                        </li>
-                    @endif
-                    
-                    @foreach ($posted_works as $work)
-                        <li>
-                            <work-item 
-                                v-bind:work="{{$work}}"
-                                v-bind:apply_count="{{ $work->applyUsers()->count() }}"
-                                v-bind:user="{{ $work->postUser }}"
-                                >
-                            </work-item>
-                        </li>
-                    @endforeach
-                    
-                </ul>
-                <ul class="c-tab__panel js-tab_panel">
-                    @if ($applied_works->count() === 0)
-                        <li class="c-tab__panel-item-not-found">
-                            まだ連絡をとっていません
-                        </li>
-                    @endif
-
-                    @foreach ($applied_works as $work)
-                        <li>
-                            <work-item 
-                                v-bind:work="{{$work}}"
-                                v-bind:apply_count="{{ $work->applyUsers()->count() }}"
-                                v-bind:user="{{ $work->postUser }}"
-                                >
-                            </work-item>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </section>  --}}
     </div>
-    
-    
     
 </div>
 

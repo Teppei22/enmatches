@@ -1,0 +1,122 @@
+.p-top{
+  &-hero{
+    background-image: url(../images/hero.jpg);
+    display: flex;
+    justify-content: center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 700px;
+    position: relative;
+    &__heading{
+      position: absolute;
+      top: 90px;
+      &__worktype{
+        margin: 20px auto;
+        width: 230px;
+        font-weight: bold;
+        background: $blue;
+        padding: 5px;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+      }
+      &__title{
+        font-size: 32px;
+        font-weight: bold;
+        margin: 20px;
+        text-align: center;
+        br{
+          @include mq-up(){
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  &-section{
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    &--button{
+      display: block;
+      margin: 0 auto;
+    }
+    &.--bg-white{
+      background: $white;
+    }
+    &__title{
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      line-height: 1.2;
+      margin-bottom: 40px;
+      br{
+        @include mq-up(){
+          display: none;
+        }
+      }
+    }
+  }
+  &-panel{
+    &-list{
+      width: 100%;
+      @include mq-up(){
+        display: flex;
+        justify-content: space-between;
+        padding: 0 15px;
+      }
+
+    }
+    &__item{
+      width: calc(100% / 3 - 15px / 2);
+      background: $white;
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+      -o-border-radius: 5px;
+      @include mq-down(){
+        width: calc(100% - 10px * 2);
+        margin: 10px;
+      }
+    }
+    &__head{
+      font-size: 25px;
+      font-weight: 600;
+      text-align: center;
+      padding: 15px;
+      letter-spacing: 2px;
+    }
+    &__img{
+      &--flow{
+        margin: 0 auto;
+      }
+    }
+    &__text{
+      padding: 5px 0;
+      line-height: 1.2;
+      width: 80%;
+      display: block;
+      margin: 0 auto;
+      h3{
+        font-size: 20px;
+        font-weight: bold;
+        padding: 5px 0;
+        text-align: center;
+      }
+      p{
+        font-size: 16px;
+        line-height: 1.5;
+        span{
+          font-size: 14px;
+          text-decoration: underline;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
