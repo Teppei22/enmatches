@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/ajax/messages','MessageController@index')->name('ajaxMsgs.index');
+Route::post('/ajax/messages','MessageController@store')->name('ajaxMsgs.store');
+Route::get('/ajax/messages/users','MessageController@getUser');
+
+
+// Route::get('/ajax/messages','MessageController@index')->name('dmMsgs.index');
