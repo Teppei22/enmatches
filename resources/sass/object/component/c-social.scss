@@ -1,0 +1,32 @@
+.c-social{
+  &-list{
+    margin: 10px auto 20px;
+    display: flex;
+    justify-content: center;
+  }
+  &__item{
+    display: flex;
+    justify-content: center;
+    margin: 5px 10px 0 5px;
+  }
+  &__link{
+    &:hover{
+      opacity: .75;
+    }
+    color: $white;
+    //width: 80px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 19px;
+    height: 40px;
+    width: 40px;
+    vertical-align: middle;
+    padding: 0;
+    transition: .15s;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+}

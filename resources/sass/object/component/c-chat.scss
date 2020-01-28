@@ -1,0 +1,83 @@
+.c-chat{
+  &__list{
+    // margin-right: 40px;
+    border-top: 1px solid $gray;
+  }
+  &__work{
+    &-wrapper{
+      border-top: 1px solid $black;
+    }
+    &-contents{
+      min-height: 70px;
+      &:hover{
+        cursor: pointer;
+        background-color: #f3f3f7;
+      }
+    }
+    &__title{
+      font-size: 20px;
+      font-weight: bold;
+      padding: 5px 10px;
+      overflow: auto;
+    }
+    &-type{
+      font-weight: bold;
+      font-size: 20px;
+      padding: 5px;
+      background: $blue;
+    }
+  }
+  &__item{
+    @mixin item-style {
+      // border-top: 1px solid #c5c7ce;
+      // border-bottom: 1px solid #c5c7ce;
+      padding: 13px 17px 13px 16px;
+    }
+    display: flex;
+    align-items: center;
+
+    @include item-style;
+    &--not-found{
+      color: $gray-dark;
+      @include item-style;
+    }
+    &.is_selected{
+      background-color: #bfc0c4;
+    }
+  }
+  &__text{
+    padding-left: 10px;
+    height: 40px;
+    flex-grow: 1;
+  }
+  &__name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $black;
+    font-size: 15px;
+    height: 20px;
+  }
+  &__date{
+    color: $gray-dark;
+  }
+  &__msg{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 15px;
+    color: #acb0bb;
+    height: 20px;
+    line-height: 20px;
+
+    &-type{
+      padding: 5px 10px;
+      font-size: 14px;
+      font-weight: bold;
+      border-top: 1px solid #c5c7ce;
+      &--msg-not-found{
+        line-height: 60px;
+      }
+    }
+  }
+}

@@ -1,15 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
+<div class="p-register l-container">
+    <div class="p-register__container">
+        <div class="p-register__header l-page__header"><h1>{{ __('Reset Password') }}</h1></div>
+        <div class="p-register__contents">
+            <div class="p-form__section">
+                <div class="p-form__section__contents">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
+                        <div class="c-dialog--success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
@@ -17,27 +16,28 @@
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <div class="p-form__item">
+                            <label for="email" class="p-form__title">{{ __('E-Mail Address') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <div class="p-form__content">
+                                <input id="email" type="email" class="p-form__input--text @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
-                                    <div class="c-dialog--err" role="alert">
+                                    <span class="p-form__item--error" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </div>
+                                    </span>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
+                        <div class="p-form__item">
+                            <div class="p-form__content p-form__content--btn">
+                                <button type="submit" class="c-btn c-btn--medium c-btn--login">
+                                    {{ __('Send') }}
                                 </button>
                             </div>
                         </div>
+                        
                     </form>
                 </div>
             </div>

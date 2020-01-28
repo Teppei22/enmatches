@@ -29,19 +29,50 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
-
+html{
+  width: 100%;
+  overflow: auto;
+}
 body {
+  width: 100%;
+  position: relative;
   line-height: 1;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans JP', sans‒serif;
   background: #f2f2f2;
+  overflow-x: hidden;
+}
+
+.wrapper{
+  width: 100%;
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  @include mq-down(){
+    flex-direction: column-reverse;
+  }
 }
 
 ol, ul, li {
   list-style: none;
 }
 
+input, textarea {
+  border: 1px $gray-dark double;
+}
+
+select{
+  @include mq-down(){
+    border: 1px $gray-dark double;
+  }
+}
+
 a{
   text-decoration: none;
+  color: inherit;
+}
+
+img{
+  width: 100%;
 }
 
 blockquote, q {
@@ -62,3 +93,13 @@ table {
 *{
   box-sizing: border-box;
 }
+
+// ::-webkit-scrollbar {
+//   -webkit-appearance: none;
+//   width: 7px;
+// }
+// ::-webkit-scrollbar-thumb {
+//   border-radius: 4px;
+//   background-color: rgba(0,0,0,.5);
+//   box-shadow: 0 0 1px rgba(255,255,255,.5);
+// }

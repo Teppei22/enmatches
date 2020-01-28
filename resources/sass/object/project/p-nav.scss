@@ -1,0 +1,21 @@
+.p-nav--horizontal{
+  &__inner{
+    display: flex;
+    font-weight: bold;
+    li{
+      transition: .1s;
+      -webkit-transition: .1s;
+      -moz-transition: .1s;
+      -ms-transition: .1s;
+      -o-transition: .1s;
+      &:hover{
+        background: $gray-light;
+      }
+    }
+    & > li > a{
+      padding-right: 15px;
+      padding-left: 15px;
+      display: block;
+    }
+  }
+}

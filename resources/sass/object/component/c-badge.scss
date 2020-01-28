@@ -1,0 +1,50 @@
+.c-badge{
+  $value--msg: 30px;
+  $value--chat: 46px;
+  $value--mypage: 150px;
+
+  @mixin badge-width_height($value) {
+    width: $value;
+    height: $value;
+  }
+  
+  &--msg{
+    @include badge-width_height($value--msg);
+    margin-left: 10px;
+  }
+  &--chat{
+    @include badge-width_height($value--chat);
+  }
+  &--mypage{
+    @include badge-width_height($value--mypage);
+    display: block;
+    margin: 0 auto;
+  }
+
+  &__content{
+    @mixin badge-content-style($value) {
+      background: $gray;
+      height: 100%;
+      overflow: hidden;
+      border-radius: $value;
+      -webkit-border-radius: $value;
+      -moz-border-radius: $value;
+      -ms-border-radius: $value;
+      -o-border-radius: $value;
+    }
+    &--msg{
+      @include badge-content-style($value--msg);
+    }
+    &--chat{
+      @include badge-content-style($value--chat);
+    }
+    &--mypage{
+      @include badge-content-style($value--mypage);
+    }
+
+  }
+  &__img{
+    width: 100%;
+    
+  }
+}

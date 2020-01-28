@@ -1,0 +1,27 @@
+.c-icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &--twitter{
+    background: $twitter_color;
+    &::before{
+      font-family: "Font Awesome 5 Brands";
+      content: '\f099';
+    }
+  }
+  &--facebook{
+    background: $facebook_color;
+    &::before{
+      font-family: "Font Awesome 5 Brands";
+      content: '\f09a';
+    }
+  }
+  &--hatena{
+    background: $hatena_color;
+    font-weight: bold;
+    &::before{
+      font-family: "Font Awesome 5 Brands";
+      content: "B!";
+    }
+  }
+}

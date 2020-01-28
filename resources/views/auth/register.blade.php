@@ -1,12 +1,16 @@
 @extends('layouts.app')
 
+@section('description',config('app.name', 'Laravel').'はネットでお手軽にお仕事を発注・受注できるWEBサービスです。ホームページやハードウェア・アプリ制作からバナーやロゴのデザインまで専門性の高い案件を発注できます。今すぐ無料で会員登録してお仕事を発注しましょう')
+
+@section('keywords',config('app.name', 'Laravel').', HP 発注, デザイン 発注, システム開発 発注')
+
 @section('content')
 <div class="p-register">
-    <div class="p-register__container">
-        <div class="p-register__header l-header"><h1>{{ __('Register') }}</h1></div>
+    <div class="p-register__container l-container">
+        <div class="p-register__header l-container__header"><h1>{{ __('Member Register') }}</h1></div>
         <div class="p-register__contents">
             <div class="p-form__section">
-                <div class="card-body">
+                <div class="p-form__section__contents">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -61,8 +65,8 @@
                         </div>
 
                         <div class="p-form__item">
-                            <div class="p-form__content offset-md-4">
-                                <button type="submit" class="c-btn c-btn--login">
+                            <div class="p-form__content p-form__content--btn">
+                                <button type="submit" class="c-btn c-btn--medium c-btn--login">
                                     {{ __('Register') }}
                                 </button>
                             </div>

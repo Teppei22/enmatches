@@ -1,0 +1,38 @@
+.c-tab{
+  height: 80px;
+  display: flex;
+  background: $gray;
+  &__label{
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    width: 50%;
+    line-height: 80px;
+    &.is-active{
+      background: $white;
+      border-top: 2px solid $blue;
+    }
+  }
+  & + &__content{
+    background: $white;
+  }
+  &__panel{
+    display: none;
+    &.is-active{
+      display: block;
+    }
+    &-item{
+      &-not-found{
+        color: $gray;
+        font-weight: bold;
+        font-size: 16px;
+        vertical-align: middle;
+        text-align: center;
+        padding-top: 60px;
+        height: 150px;
+      }
+    }
+  }
+}

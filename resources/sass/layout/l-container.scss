@@ -1,0 +1,21 @@
+.l-container{
+  width: 520px;
+  padding: 0 5px;
+  @include mq-down(){
+    width: 100%;
+    
+  }
+  &--two-column{
+    min-width: auto;
+  }
+  &__header{
+    font-weight: bold;
+    font-size: 25px;
+    margin: 30px;
+    text-align: center;
+  }
+  &--wrapper{
+    width: 100%;
+    margin-top: -30px;
+  }
+}

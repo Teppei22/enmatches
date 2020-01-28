@@ -1,28 +1,26 @@
 .p-header{
+  width: 100%;
   background-color: #fff;
   font-family: $font-family-amatic;
   box-shadow: 0 3px 3px 0 rgba(0,0,0,0.16);
+  padding: 0 15px;
+  @include mq-up(){
+    padding: 0 30px;
+  }
   &__title{
     font-size: 25px;
-    padding-left: 30px;
-    padding-right: 40px;
   }
   &__inner{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     line-height: 100px;
     font-size: 18px;
   }
   &__nav{
     letter-spacing: 2px;
-    .p-navHorizontal{
-      &__inner{
-        display: flex;  
-        & > li > a{
-          padding-right: 15px;
-          padding-left: 15px;
-        } 
-      }
+    @include mq-down(){
+      display: none;
     }
   }
 }

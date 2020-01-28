@@ -2,4 +2,9 @@
   &--err{
     color: $red;
   }
+  &--success{
+    color: $blue;
+    font-weight: bold;
+    text-align: center;
+  }
 }

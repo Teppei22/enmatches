@@ -1,0 +1,61 @@
+.p-mypage{
+  &__contents{
+    background: $white;
+  }
+  &__thumbnail{
+    &__name{
+      margin-top: 8px;
+      font-size: 18px;
+      text-align: center;
+    }
+  }
+  &__tab{
+    margin: 20px 0;
+    border-bottom: 4px solid $blue;
+
+    &-content{
+      padding: 10px auto;
+      max-height: 400px;
+      overflow-y: scroll;
+    }
+  }
+
+  &__menu{
+    padding-top: 10px;
+    margin: 90px 30px auto;
+    min-width: 230px;
+    background: $white;
+    @include mq-down(){
+      margin-top: 0;
+    }
+  }
+
+  &__nav{
+    margin: 10px;
+    border-top: 1px solid $gray-dark;
+    &-list{
+      margin: 10px 0;
+      &__item{
+        position: relative;
+        display: block;
+        min-height: 48px;
+        padding: 16px;
+        background: $white;
+        font-size: 16px;
+        color: #333;
+        @include mq-down(){
+          text-align: center;
+        }
+        &:hover{
+          background: $gray-light;
+        }
+        &.is_selected{
+          background: $gray-dark;
+        }
+        &__text{
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}
