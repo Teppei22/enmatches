@@ -1,4 +1,3 @@
-
 $(function(){
   var $ftr = $('.js-fix-footer');
   if (window.innerHeight > $ftr.offset().top + $ftr.outerHeight()) {

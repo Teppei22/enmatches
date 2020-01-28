@@ -4,14 +4,29 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-
-require('./assets/fix_footer');
-require('./assets/works_new'); 
-require('./assets/live_preview_img'); 
-
-
+import $ from 'jquery';
+window.$ = $;
 import Vue from 'vue';
+import axios from 'axios';
+window.axios = axios;
+// import sanitizeHTML from 'sanitize-html';
+
+// require('./bootstrap');
+require('./assets/fix_footer');
+require('./assets/works_new');
+require('./assets/live_preview_img');
+require('./assets/change_tab');
+require('./assets/sp_nav_menu');
+require('./assets/float_button');
+
+Vue.prototype.axios = axios;
+// Vue.prototype.sanitize = sanitizeHTML;
+Vue.prototype.$ = $;
+
+
+
+
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -24,9 +39,9 @@ import Vue from 'vue';
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('work-item', require('./components/WorkItemComponent.vue').default);
-Vue.component('work-list', require('./components/WorkListComponent.vue').default);
+Vue.component('message-list', require('./components/MessageListComponent.vue').default);
+Vue.component('message-item', require('./components/MessageItemComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -34,6 +49,23 @@ Vue.component('work-list', require('./components/WorkListComponent.vue').default
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
 const app = new Vue({
     el: '#app',
+    methods: {
+        // ユーザのプロフィール画像をgetする
+        getImage: function (user) {
+            var img = new Image()
+            var baseUrl = '/storage/profile_thumbnail/'
+
+            if (user.thumbnail) {
+                img.src = baseUrl + user.thumbnail
+                
+            } else {
+                img.src = baseUrl + 'user.jpg'
+            }
+
+            return img.src;
+        }
+    }
 });
