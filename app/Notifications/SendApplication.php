@@ -51,8 +51,7 @@ class SendApplication extends Notification
             ->subject(__('Your Work Applied'))
             ->line($this->apply_user->name.__(' applied your work'))
             ->line('案件 : '.$this->work->title)
-            ->action(__('Message Applying User'), route('message.show',['message_type'=>'direct'],['w' => $this->work->id],['u' => $this->apply_user->id]));
-
+            ->action(__('Message Applying User'), route('message.show',['message_type'=>'direct','w' => $this->work->id,'u' => $this->apply_user->id]));
 
     }
 
