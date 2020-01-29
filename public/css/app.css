@@ -920,8 +920,7 @@ table {
   background: #fff; }
 
 .p-works__search {
-  padding-top: 10px;
-  padding-left: 10px; }
+  padding: 10px; }
   .p-works__search__tools {
     margin: 10px 0; }
     .p-works__search__tools__title {
@@ -929,8 +928,7 @@ table {
       padding: 5px 0; }
     .p-works__search__tools__search-btn {
       padding-top: 10px;
-      display: flex;
-      justify-content: center; }
+      width: 100%; }
     .p-works__search__tools input[type=text], .p-works__search__tools input[type=number] {
       height: 30px;
       font-size: 16px;
