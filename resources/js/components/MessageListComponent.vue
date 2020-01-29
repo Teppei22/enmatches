@@ -6,6 +6,10 @@
           <template v-if="index==='posted'">投稿案件</template>
           <template v-else-if="index==='applied'">応募案件</template>
         </div>
+        <section v-if="works.length === 0" class="c-chat__work--not-found">
+          <template v-if="index==='posted'">登録された案件はありません</template>
+          <template v-else-if="index==='applied'">応募した案件はありません</template>
+        </section>
         <section v-for="work in works" :key="work.id" class="c-chat__work-wrapper">
           <section>
             <div class="c-chat__work__title">
@@ -15,11 +19,11 @@
             </div>
 
             <section class="c-chat__work-contents">
-              <a :href="'/message/public?w='+work.id">
+              <a class="c-chat__work__link" :href="'/message/public?w='+work.id">
                 <div class="c-chat__msg-type" :class="{'c-chat__msg-type--msg-not-found': !work.public_latest_message}">
                   パブリックメッセージ
                 </div>
-                <div v-if="work.public_latest_message.length" class="c-chat__item">
+                <div v-if="work.public_latest_message.length !== 0" class="c-chat__item">
                     <div class="c-badge--chat">
                       <div class="c-badge__content--chat">
                         <img :src="showImage(work.public_latest_message.from_user)" :class="'c-badge__img js-getImg'+work.public_latest_message.from_user_id">
@@ -122,14 +126,8 @@
       // ユーザのサムネイル画像を返す
       showImage: function(user){
         var img = new Image()
-        var baseUrl = '/storage/profile_thumbnail/'
 
-        if (user.thumbnail) {
-            img.src = baseUrl + user.thumbnail
-            
-        } else {
-            img.src = baseUrl + 'user.jpg'
-        }
+        img.src = (user.thumbnail) ? user.thumbnail : '/images/default_user.jpg'
 
         return img.src;
       }

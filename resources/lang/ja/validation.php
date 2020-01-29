@@ -147,7 +147,7 @@ return [
         // profilerequest
         'name' => '名前',
         'thumbnail' => 'サムネイル画像',
-        'description' => '技術詳細',
+        'description' => '案件詳細',
         // workrequest
         'title' => 'お仕事名',
         'single_price_min' => '下限金額',

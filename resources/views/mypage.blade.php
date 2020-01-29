@@ -8,8 +8,8 @@
         <div class="c-badge--mypage">
             <div class="c-badge__content--mypage">
                 <a href="{{ route('profile') }}">
-                    <img class="c-badge__img" src="@if(!empty(Auth::user()->thumbnail)){{ asset("storage/profile_thumbnail/".Auth::user()->thumbnail) }}@else{{ asset("storage/profile_thumbnail/user.jpg") }}@endif" alt="">
-                </a>         
+                    <img class="c-badge__img" src="@if(!empty(Auth::user()->thumbnail)){{ Auth::user()->thumbnail }}@else{{ asset("images/default_user.jpg") }}@endif" alt="">
+                </a>
             </div>  
         </div>
         <div class="p-mypage__thumbnail__name">

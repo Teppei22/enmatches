@@ -1323,14 +1323,7 @@ var _default = {
     // サムネイル画像を表示する
     showImage: function showImage(user) {
       var img = new Image();
-      var baseUrl = '/storage/profile_thumbnail/';
-
-      if (user.thumbnail) {
-        img.src = baseUrl + user.thumbnail;
-      } else {
-        img.src = baseUrl + 'user.jpg';
-      }
-
+      img.src = user.thumbnail ? user.thumbnail : '/images/default_user.jpg';
       return img.src;
     }
   }
@@ -1464,6 +1457,10 @@ exports["default"] = void 0;
 //
 //
 //
+//
+//
+//
+//
 var _default = {
   props: ['self_user', 'posted_works', 'applied_works'],
   data: function data() {
@@ -1481,14 +1478,7 @@ var _default = {
     // ユーザのサムネイル画像を返す
     showImage: function showImage(user) {
       var img = new Image();
-      var baseUrl = '/storage/profile_thumbnail/';
-
-      if (user.thumbnail) {
-        img.src = baseUrl + user.thumbnail;
-      } else {
-        img.src = baseUrl + 'user.jpg';
-      }
-
+      img.src = user.thumbnail ? user.thumbnail : '/images/default_user.jpg';
       return img.src;
     }
   }
@@ -1701,14 +1691,7 @@ var _default = {
     // ユーザのプロフィール画像を表示する
     showImage: function showImage(user) {
       var img = new Image();
-      var baseUrl = '/storage/profile_thumbnail/';
-
-      if (user.thumbnail) {
-        img.src = baseUrl + user.thumbnail;
-      } else {
-        img.src = baseUrl + 'user.jpg';
-      }
-
+      img.src = user.thumbnail ? user.thumbnail : '/images/default_user.jpg';
       return img.src;
     }
   }
@@ -1782,14 +1765,7 @@ var app = new _vue["default"]({
     // ユーザのプロフィール画像をgetする
     getImage: function getImage(user) {
       var img = new Image();
-      var baseUrl = '/storage/profile_thumbnail/';
-
-      if (user.thumbnail) {
-        img.src = baseUrl + user.thumbnail;
-      } else {
-        img.src = baseUrl + 'user.jpg';
-      }
-
+      img.src = user.thumbnail ? user.thumbnail : '/images/default_user.jpg';
       return img.src;
     }
   }
@@ -25873,6 +25849,21 @@ var render = function() {
               2
             ),
             _vm._v(" "),
+            works.length === 0
+              ? _c(
+                  "section",
+                  { staticClass: "c-chat__work--not-found" },
+                  [
+                    index === "posted"
+                      ? [_vm._v("登録された案件はありません")]
+                      : index === "applied"
+                      ? [_vm._v("応募した案件はありません")]
+                      : _vm._e()
+                  ],
+                  2
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _vm._l(works, function(work) {
               return _c(
                 "section",
@@ -25892,7 +25883,10 @@ var render = function() {
                     _c("section", { staticClass: "c-chat__work-contents" }, [
                       _c(
                         "a",
-                        { attrs: { href: "/message/public?w=" + work.id } },
+                        {
+                          staticClass: "c-chat__work__link",
+                          attrs: { href: "/message/public?w=" + work.id }
+                        },
                         [
                           _c(
                             "div",
@@ -25909,7 +25903,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          work.public_latest_message.length
+                          work.public_latest_message.length !== 0
                             ? _c("div", { staticClass: "c-chat__item" }, [
                                 _c("div", { staticClass: "c-badge--chat" }, [
                                   _c(
@@ -26267,7 +26261,7 @@ var render = function() {
       "div",
       { ref: "list", staticClass: "c-message__list" },
       [
-        _vm.message_type === "direct" && !_vm.messages.length
+        _vm.message_type === "direct" && _vm.messages.length === 0
           ? [
               _vm.work.user_id == _vm.self_user_id
                 ? _c("section", { staticClass: "c-message__item--none" }, [

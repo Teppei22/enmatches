@@ -1,7 +1,10 @@
 .p-form{
   
   &__section{
-    padding: 10px 25px;
+    padding: 30px 50px;
+    @include mq-down(){
+      padding: 10px 25px;
+    }
   }
   &__title{
     font-size: 14px;
@@ -39,6 +42,7 @@
     }
     &--error{
       color: $red;
+      margin-top: 5px;
     }
   }
 

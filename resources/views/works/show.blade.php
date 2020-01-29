@@ -50,6 +50,12 @@
     <li class="c-social__item">
       <a class="c-social__link c-icon c-icon--twitter" href="https://twitter.com/intent/tweet?url={{ route('works.show',$work->id) }}&text={{ $work->title }}%0a" rel="nofollow" target="_blank"></a>
     </li>
+    <li class="c-social__item">
+      <a class="c-social__link c-icon c-icon--facebook" href="https://www.facebook.com/sharer.php?u={{ route('works.show',$work->id) }}" rel="nofollow" target="_blank"></a>
+    </li>
+    <li class="c-social__item">
+      <a class="c-social__link c-icon c-icon--hatena" href="https://b.hatena.ne.jp/add?mode=confirm&url={{ route('works.show',$work->id) }}&title={{ $work->title }}" rel="nofollow" target="_blank"></a>
+    </li>
      
   </ul>
 

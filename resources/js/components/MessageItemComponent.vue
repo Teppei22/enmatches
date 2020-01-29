@@ -1,7 +1,7 @@
 <template>
     <div class="c-message">
       <div class="c-message__list" ref="list">
-        <template v-if="message_type === 'direct' && !messages.length">
+        <template v-if="message_type === 'direct' && messages.length === 0">
           <section class="c-message__item--none" v-if="work.user_id == self_user_id">
             メッセージであなたの要望を伝えましょう!
           </section>
@@ -101,7 +101,7 @@
             }
           }).then((res) => {
             this.messages = res.data //←取得したMessageリストをmessagesに格納
-            
+
           })
         }else if(this.$props.message_type === 'direct'){
           axios.get('/ajax/messages', {
@@ -186,14 +186,8 @@
       // ユーザのプロフィール画像を表示する
       showImage: function(user){
         var img = new Image()
-        var baseUrl = '/storage/profile_thumbnail/'
 
-        if (user.thumbnail) {
-          img.src = baseUrl + user.thumbnail
-            
-        } else {
-          img.src = baseUrl + 'user.jpg'
-        }
+        img.src = (user.thumbnail) ? user.thumbnail : '/images/default_user.jpg'
 
         return img.src;
       }

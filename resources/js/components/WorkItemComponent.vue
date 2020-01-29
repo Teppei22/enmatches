@@ -79,14 +79,8 @@
         // サムネイル画像を表示する
         showImage: function(user){
           var img = new Image()
-          var baseUrl = '/storage/profile_thumbnail/'
 
-          if (user.thumbnail) {
-              img.src = baseUrl + user.thumbnail
-              
-          } else {
-              img.src = baseUrl + 'user.jpg'
-          }
+          img.src = (user.thumbnail) ? user.thumbnail : '/images/default_user.jpg'
 
           return img.src;
         }

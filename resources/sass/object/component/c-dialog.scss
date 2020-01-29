@@ -1,6 +1,7 @@
 .c-dialog{
   &--err{
     color: $red;
+    margin-top: 5px;
   }
   &--success{
     color: $blue;

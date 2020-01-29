@@ -17,7 +17,7 @@
                           <label for="thumbnail" class="p-form__content--img">
                               <input type="hidden" name="MAX_FILE_SIZE" value="3145728">
                               <img class="p-form__input--prev-img" 
-                              src="@if(!empty($user->thumbnail)){{ asset("storage/profile_thumbnail/".$user->thumbnail) }}@else{{ asset("storage/profile_thumbnail/user.jpg") }}@endif">
+                              src="@if(!empty($user->thumbnail)){{ $user->thumbnail }}@else{{ asset("images/default_user.jpg") }}@endif">
                               
                           </label>
 

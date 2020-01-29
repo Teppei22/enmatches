@@ -34,6 +34,7 @@
   @if ($message_type === 'direct')
       <h3 class="p-message__destination"><a href="{{ route('profile.show',$partner_user->id) }}"> {{ $partner_user->name   }}</a></h3>
   @endif
+
   <message-item
     message_type="{{ $message_type }}"
     :self_user_id="{{ Auth::id() }}"
