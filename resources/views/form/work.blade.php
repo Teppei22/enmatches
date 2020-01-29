@@ -24,9 +24,9 @@
                         <label for="type" class="p-form__title">{{ __('Work Type') }}</label>
 
                         <div class="p-form__content">
-                            <select name="type_id" class="p-form__input--select js-type_select @error('type_id') is-invalid @enderror" value="{{ old('type_id', $type_id_default) }}" autofocus>
+                            <select name="type_id" class="p-form__input--select js-type_select @error('type_id') is-invalid @enderror" autofocus>
                                 @foreach ($work_types as $key => $val)
-                                    <option value="{{ $val["id"] }}">{{ $val["name"] }}</option>
+                                    <option value="{{ $val["id"] }}" @if((int)old('type_id', $type_id_default) === $val["id"])selected @endif>{{ $val["name"] }}</option>
                                 @endforeach
                             </select>
 

@@ -100,6 +100,17 @@ class WorksController extends Controller
     {
         $work = Auth::user()->postedWorks()->find($id);
 
+        if($work->type_id !== $request->type_id){
+            if($request->type_id === 1){
+
+                $work->revenue_share_price = null;
+
+            }else if($request->type_id === 2){
+                $work->single_price_min = null;
+                $work->single_price_max = null;
+            }
+        }
+
         Auth::user()->postedWorks()->save($work->fill($request->all()));
 
         return redirect()->route('works.show',$id);

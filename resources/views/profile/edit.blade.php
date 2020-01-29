@@ -18,7 +18,7 @@
                                 <label for="thumbnail" class="p-form__content--img js-area-drop @error('thumbnail') is-invalid @enderror">
                                     <input type="hidden" name="MAX_FILE_SIZE" value="">
                                     <input type="file" name="thumbnail" class="p-form__input--file js-input-file">
-                                    <img class="p-form__input--prev-img js-prev-img" src="@if(!empty($user->thumbnail)){{ asset("storage/profile_thumbnail/".$user->thumbnail) }}@else{{ asset("storage/profile_thumbnail/user.jpg") }}@endif">
+                                    <img class="p-form__input--prev-img js-prev-img" src="@if(!empty($user->thumbnail)){{ $user->thumbnail }}@else{{ asset("images/default_user.jpg") }}@endif">
                                         
                                 </label>
                                 

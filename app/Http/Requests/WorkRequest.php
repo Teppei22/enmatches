@@ -42,8 +42,8 @@ class WorkRequest extends FormRequest
                     if($value % 1000 !== 0){
                         return $fail($this->attributes()[$attribute].'は1000円単位で入力してください。');
                     }
-                }],
-            'revenue_share_price' => ['required_if:type_id,2','nullable','integer','min:1000',
+                },'max:10000000'],
+            'revenue_share_price' => ['required_if:type_id,2','nullable','integer','min:1000','max:10000000',
                 function($attribute, $value, $fail) {
                     if($value % 1000 !== 0){
                         return $fail($this->attributes()[$attribute].'は1000円単位で入力してください。');
@@ -53,19 +53,12 @@ class WorkRequest extends FormRequest
         ];
     }
 
-    // public function attributes() {
-    //     return [
-    //         'title' => 'お仕事名',
-    //         'single_price_min' => '下限金額',
-    //         'single_price_max' => '上限金額',
-    //         'revenue_share_price' => '固定単価',
-    //         'detail' => 'お仕事詳細'
-    //     ];
-    // }
-
-    // public function messages()
-    // {
-    //     //
-    // }
+    public function messages()
+    {
+        return [
+            'single_price_max.max' => ':attributeには10,000,000以下の数字を指定してください。',
+            'revenue_share_price.max'  => ':attributeには10,000,000以下の数字を指定してください。'
+        ];
+    }
     
 }

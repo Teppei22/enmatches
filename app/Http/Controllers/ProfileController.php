@@ -17,16 +17,11 @@ class ProfileController extends Controller
 {
     /**
     * プロフィール編集画面
-    * 
-    * @param bool $is_image ユーザのサムネイル画像がすでに保存されているか否か
     *
     * @return \Illuminate\Http\Response
     */
-    public function edit($is_image = false)
+    public function edit()
     {
-
-
-        // 「$idがログインしている自分のid」か確認
         $user = Auth::user();
 
         return view('profile.edit', compact('user'));
@@ -68,9 +63,12 @@ class ProfileController extends Controller
     {
         // サムネイルを保存
         $user = Auth::user();
-        if($request->thumbnail){
-            $path = $request->file('thumbnail')->store('public/profile_thumbnail');
-            $user->thumbnail = basename($path);
+        $image_file = $request->file('thumbnail');
+        if(!empty($image_file)){
+
+            $path = Storage::disk('s3')->putFile('/', $image_file, 'public');
+
+            $user->thumbnail = Storage::disk('s3')->url($path);
         }
         if($user->description !== $request->description){
             $user->description = $request->description;
@@ -80,7 +78,7 @@ class ProfileController extends Controller
         }
 
         $user->save();
-        return redirect('profile');
+        return redirect()->route('profile');
     }
 
 }

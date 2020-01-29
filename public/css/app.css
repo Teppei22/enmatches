@@ -186,7 +186,7 @@ table {
   .c-btn--small {
     width: 100px; }
   .c-btn--medium {
-    min-width: 300px; }
+    width: 100%; }
   .c-btn--float {
     display: flex;
     justify-content: space-around;
@@ -238,11 +238,20 @@ table {
 .c-chat__list {
   border-top: 1px solid #aaa; }
 
+.c-chat__work--not-found {
+  color: #aaa;
+  font-weight: bold;
+  font-size: 16px;
+  vertical-align: middle;
+  text-align: center;
+  padding: 30px 0; }
+
 .c-chat__work-wrapper {
   border-top: 1px solid #000; }
 
 .c-chat__work-contents {
-  min-height: 70px; }
+  min-height: 70px;
+  position: relative; }
   .c-chat__work-contents:hover {
     cursor: pointer;
     background-color: #f3f3f7; }
@@ -258,6 +267,11 @@ table {
   font-size: 20px;
   padding: 5px;
   background: #3490dc; }
+
+.c-chat__work__link {
+  display: block;
+  width: 100%;
+  height: 100%; }
 
 .c-chat__item {
   display: flex;
@@ -302,7 +316,8 @@ table {
       line-height: 60px; }
 
 .c-dialog--err {
-  color: #e3342f; }
+  color: #e3342f;
+  margin-top: 5px; }
 
 .c-dialog--success {
   color: #3490dc;
@@ -594,7 +609,10 @@ table {
   box-shadow: 0 -3px 3px 0 rgba(0, 0, 0, 0.16); }
 
 .p-form__section {
-  padding: 10px 25px; }
+  padding: 30px 50px; }
+  @media screen and (max-width: 521px) {
+    .p-form__section {
+      padding: 10px 25px; } }
 
 .p-form__title {
   font-size: 14px;
@@ -624,7 +642,8 @@ table {
   margin-top: 20px; }
 
 .p-form__item--error {
-  color: #e3342f; }
+  color: #e3342f;
+  margin-top: 5px; }
 
 .p-form__input--text {
   width: 100%;
