@@ -74,6 +74,12 @@ class User extends Authenticatable
     // ユーザが応募する案件
     public function appliedWorks()
     {
-        return $this->belongsToMany('App\Work')->withTimestamps();
+        return $this->belongsToMany('App\Work','applies')->withTimestamps();
+    }
+
+    // ユーザがいいねする案件
+    public function likedWorks()
+    {
+        return $this->belongsToMany('App\Work','likes')->withTimestamps();
     }
 }

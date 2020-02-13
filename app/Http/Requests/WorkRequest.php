@@ -34,21 +34,15 @@ class WorkRequest extends FormRequest
             'single_price_min' => ['required_if:type_id,1','nullable','integer','min:1000',
                 function($attribute, $value, $fail) {
                     if($value % 1000 !== 0){
-                        return $fail($this->attributes()[$attribute].'は1000円単位で入力してください。');
+                        return $fail($attribute.'は1000円単位で入力してください。');
                     }
                 }],
-            'single_price_max' => ['required_if:type_id,1','nullable','integer','gte:single_price_min',
+            'single_price_max' => ['required_if:type_id,1','nullable','integer','gt:single_price_min',
                 function($attribute, $value, $fail) {
                     if($value % 1000 !== 0){
-                        return $fail($this->attributes()[$attribute].'は1000円単位で入力してください。');
+                        return $fail($attribute.'は1000円単位で入力してください。');
                     }
                 },'max:10000000'],
-            'revenue_share_price' => ['required_if:type_id,2','nullable','integer','min:1000','max:10000000',
-                function($attribute, $value, $fail) {
-                    if($value % 1000 !== 0){
-                        return $fail($this->attributes()[$attribute].'は1000円単位で入力してください。');
-                    }
-                }],
             'detail' => 'required|string|max:500'
         ];
     }
@@ -56,8 +50,7 @@ class WorkRequest extends FormRequest
     public function messages()
     {
         return [
-            'single_price_max.max' => ':attributeには10,000,000以下の数字を指定してください。',
-            'revenue_share_price.max'  => ':attributeには10,000,000以下の数字を指定してください。'
+            'single_price_max.max' => ':attributeには10,000,000以下の数字を指定してください。'
         ];
     }
     

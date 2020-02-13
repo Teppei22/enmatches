@@ -47,9 +47,7 @@ class ProfileController extends Controller
             return redirect('profile');
         }
         
-        $is_image = $this->imageExists($id);
-        
-        return view('profile.show', compact('user','is_image')); 
+        return view('profile.show', compact('user')); 
     }
 
     /**
@@ -61,6 +59,7 @@ class ProfileController extends Controller
     */
     public function store(ProfileRequest $request)
     {
+        // dd($request->file('thumbnail'));
         // サムネイルを保存
         $user = Auth::user();
         $image_file = $request->file('thumbnail');
@@ -70,15 +69,14 @@ class ProfileController extends Controller
 
             $user->thumbnail = Storage::disk('s3')->url($path);
         }
-        if($user->description !== $request->description){
-            $user->description = $request->description;
-        }
-        if($user->name !== $request->name){
-            $user->name = $request->name;
-        }
+
+        $user->description = $request->description;
+        $user->name = $request->name;
+        $user->email = $request->email;
 
         $user->save();
-        return redirect()->route('profile');
+        
+        return redirect()->route('mypage')->with('flash_message', __('Changed'));
     }
 
 }

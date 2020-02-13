@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +27,10 @@ class AppServiceProvider extends ServiceProvider
         if(config('app.force_ssl')){
             \URL::forceScheme('https');
         }
+
+        // ページネーションビュー設定
+        Paginator::defaultView('vendor.pagination.default');
+
+        Paginator::defaultSimpleView('vendor.pagination.default');
     }
 }

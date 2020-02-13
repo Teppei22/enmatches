@@ -65,8 +65,8 @@ class MessageController extends Controller
         $worksController = new WorksController;
         $work_id = $request->w;
         $work = Work::find($work_id);
-        $login_user_id = Auth::id();
-        $partner_user_id = ($message_type == 'direct') ? $request->u : 0;
+        $login_user = Auth::user();
+        $partner_user = ($message_type == 'direct') ? User::find($request->u) : null;
 
         if(
             // 案件が存在するか
@@ -77,19 +77,17 @@ class MessageController extends Controller
                 !(
                     $message_type == 'direct' &&
                     (
-                        ( ($work->user_id == $login_user_id) && $worksController->existsApplyUsers($work, $partner_user_id) ) || 
-                        ( ($work->user_id == $partner_user_id) && $worksController->existsApplyUsers($work, $login_user_id) )
+                        ( ($work->user_id == $login_user->id) && $worksController->existsApplyUsers($work, $partner_user) ) || 
+                        ( ($work->user_id == $partner_user->id) && $worksController->existsApplyUsers($work, $login_user) )
                     )
                 ) &&
                 !(
-                    $message_type == 'public' && ( $work->user_id == $login_user_id || $worksController->existsApplyUsers($work, $login_user_id) )
+                    $message_type == 'public' && ( $work->user_id == $login_user->id || $worksController->existsApplyUsers($work, $login_user) )
                 )
             )
         ){
-            return redirect('message');
+            abort('404');
         }
-
-        $partner_user = ($message_type == 'direct') ? User::find($request->u) : null;
         
         return view('message.show', compact('work','partner_user','message_type'));
     }

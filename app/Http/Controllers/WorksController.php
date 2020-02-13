@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Work;
+use App\Message;
 use App\WorkTypes;
 use Illuminate\Http\Request;
 use App\Http\Requests\WorkRequest;
@@ -63,7 +64,7 @@ class WorksController extends Controller
         }
 
         $user = User::find($work->user_id);
-        $is_applied = $this->existsApplyUsers($work, Auth::id());
+        $is_applied = $this->existsApplyUsers($work, Auth::user());
         $type = $this->type;
         
         return view('works.show', compact('work','user','type', 'is_applied'));
@@ -113,7 +114,24 @@ class WorksController extends Controller
 
         Auth::user()->postedWorks()->save($work->fill($request->all()));
 
-        return redirect()->route('works.show',$id);
+        return redirect()->route('works.show',$id)->with('flash_message', __('Changed'));
+    }
+
+    /**
+    * 案件削除
+    *
+    * @param int $id
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function delete($id)
+    {
+
+        $work = Auth::user()->postedWorks()->find($id);
+
+        $work->delete();
+        return redirect()->route('mypage')->with('flash_message',__('Deleted'));
+
     }
 
     /**
@@ -125,23 +143,21 @@ class WorksController extends Controller
     */
     public function index(Request $request)
     {
-        
+
         $request->validate([
             'sort' => ['nullable','string','regex:/^(single|revsh|single_revsh)$/'],
-            'order' => 'nullable|string',
+            'keyword' => 'nullable|string',
             'min_price' => 'nullable|numeric|min:0',
-            'max_price' => 'nullable|numeric|gte:min_price',
-            'keyword' => 'nullable|string'
+            'max_price' => 'nullable|numeric|min:0',
+            
         ]);
-
         $sort = $request->sort;
-        $order = $request->order;
         $min_price = $request->min_price;
         $max_price = $request->max_price;
         $keyword =  $request->keyword;
+        
         session([
             'sort' => $sort,
-            'order' => $order,
             'min_price' => $min_price,
             'max_price' => $max_price,
             'keyword' => $keyword
@@ -159,23 +175,28 @@ class WorksController extends Controller
                 });
             })
             // 報酬金額で絞る
-            ->where(function ($query)use($min_price, $max_price){
-                return $query->when($min_price, function ($query)use($min_price, $max_price) {
-                    return $query->whereBetween('revenue_share_price', [$min_price, $max_price])
-                                 ->orWhere(function ($query)use($min_price, $max_price) {
-                                    $query->whereBetween('single_price_min', [$min_price, $max_price])
-                                          ->whereBetween('single_price_max', [$min_price, $max_price]);
-                        }); 
-                });
+            ->where(function ($query)use($min_price){
+                return $query->when($min_price || $min_price === '0', function ($query)use($min_price) {
+                    return $query->Where('single_price_min', '>=' ,$min_price);
+                    }
+                );
             })
+            ->where(function ($query)use($max_price){
+                return $query->when($max_price || $max_price === '0', function ($query)use($max_price) {
+                    return $query->Where('single_price_max', '<=' ,$max_price);
+                    }
+                );
+            })
+            
+            
             // キーワード検索で絞る
             ->where(function($query)use($keyword){
                 $query->when($keyword, function ($query) use($keyword) {
                     return $query->where('title','like','%'.$keyword.'%');
                 });
             })
-            ->latest()->get();
-        
+            ->latest()->paginate(10);
+
         $work_types = WorkTypes::all();
 
         return view('works.index', compact('works','work_types'));
@@ -185,17 +206,35 @@ class WorksController extends Controller
      * 特定案件にユーザが応募しているかを判定する
      *
      * @param App\Work $work
-     * @param int $user_id
+     * @param App\User $user
      * 
-     * @return App\User
+     * @return bool
      */
-    public function existsApplyUsers($work, $user_id){
-        // return $work->whereHas('applyUsers', function($query) use($user_id){
-        //     $query->where('user_id', $user_id);
-        // })->exists();
-        return DB::table('user_work')->where(function($query) use($user_id, $work){
-            $query->where('user_id', $user_id)->where('work_id', $work->id);
-        })->exists();
+    public function existsApplyUsers($work, $user){
+
+        if(!empty($user)){
+
+            return DB::table('applies')->where('user_id', $user->id)->where('work_id', $work->id)->exists();
+
+        }else{
+
+            return false;
+        }
+        
+
+    }
+
+    /**
+     * 特定案件にユーザがいいねしているかを判定する
+     *
+     * @param App\Work $work
+     * @param App\User $user
+     * 
+     * @return bool
+     */
+    public function existsLikeUsers($work, $user){
+
+        return DB::table('likes')->where('user_id', $user->id)->where('work_id', $work->id)->exists();
 
     }
 
@@ -206,22 +245,63 @@ class WorksController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function applyWork(Request $request)
+    public function applyWork($work_id, $user_id)
     {
 
-        $work = Work::find($request->work_id);
+        $work = Work::find($work_id);
 
         $login_user = Auth::user();
-        $post_user = User::find($request->user_id);
+        $post_user = User::find($user_id);
 
-        if($work->user_id !== $login_user->id && !$this->existsApplyUsers($work, $post_user->id)){
-            $login_user->appliedWorks()->attach($work->id);
+        if($work->user_id !== $login_user->id){
+
+            if($this->existsApplyUsers($work, $login_user)){
+
+                $login_user->appliedWorks()->detach($work->id);
+
+
+            }else{
+
+                $login_user->appliedWorks()->attach($work->id);
+
+                // 案件投稿者への応募通知メール
+                $post_user->sendApplicationNotification($login_user, $work);
+
+            }
         }
 
-        // 案件投稿者への応募通知メール
-        $post_user->sendApplicationNotification($login_user, $work);
+        // return redirect()->route('message.show',['message_type' => 'direct', 'w' => $work->id, 'u' => $post_user->id]);
+        return redirect()->route('works.show', $work->id);
+    }
 
-        return redirect()->route('message.show',['message_type' => 'direct', 'w' => $work->id, 'u' => $post_user->id]);
+    /**
+    * 案件いいね処理
+    *
+    * @param Illuminate\Http\Request $request
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function likeWork($work_id)
+    {
+
+        $work = Work::find($work_id);
+        $login_user = Auth::user();
+        $post_user = $work->postUser;
+
+        if($work->user_id !== $login_user->id){
+
+            if($this->existsLikeUsers($work, $login_user)){
+
+                $login_user->likedWorks()->detach($work->id);
+
+            }else{
+
+                $login_user->likedWorks()->attach($work->id);
+
+            }
+        }
+
+        return redirect()->route('works.show', $work->id);
     }
 
 }

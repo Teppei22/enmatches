@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
@@ -24,16 +25,11 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'thumbnail' => 'nullable|file|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'name' => 'required|string|max:10',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.Auth::id()],
+            'thumbnail' => 'nullable|file|image|mimes:jpeg,png,jpg,gif|max:3072',
             'description' => 'nullable|string|max:1000',
         ];
     }
 
-    // public function attributes() {
-    //     return [
-    //         'name' => '名前',
-    //         'thumbnail' => 'サムネイル画像',
-    //     ];
-    // }
 }
