@@ -15,6 +15,8 @@
         @slot('revenue_share_price_default', $work->revenue_share_price)
         @slot('detail_default', $work->detail)
         @slot('submit_word', __('Update'))
+        @slot('delete_flg', true)
+        @slot('delete_action', route('works.delete',$work->id))
     @endcomponent
     
 @endsection

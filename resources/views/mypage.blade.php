@@ -115,12 +115,39 @@
                             <work-item 
                                 v-bind:work="{{$work}}"
                                 v-bind:apply_count="{{ $work->applyUsers()->count() }}"
-                                v-bind:user="{{ $work->postUser }}"
                                 v-bind:post_flg="{{ ($work->user_id === Auth::id()) ? 1 : 0 }}"
                                 >
                             </work-item>
                         </li>
                     @endforeach
+                </ul>
+            </div>
+        </section>
+
+        <section class="p-mypage__tab">
+            <ul class="c-tab js-tab_labels">
+                <li class="js-tab_label c-tab__label is-active">
+                    <h3>いいね！案件</h3>
+                </li>
+            </ul>
+            <div class="c-tab__content p-mypage__tab-content js-tab_panels">
+                <ul class="c-tab__panel is-active js-tab_panel">
+                    @if ($liked_works->count() === 0)
+                        <li class="c-tab__panel-item-not-found">
+                            登録された案件はありません
+                        </li>
+                    @endif
+                    
+                    @foreach ($liked_works as $work)
+                        <li>
+                            <work-item 
+                                v-bind:work="{{$work}}"
+                                v-bind:apply_count="{{ $work->applyUsers()->count() }}"
+                                v-bind:post_flg="{{ ($work->user_id === Auth::id()) ? 1 : 0 }}"
+                                >
+                            </work-item>
+                        </li>
+                    @endforeach 
                 </ul>
             </div>
         </section>

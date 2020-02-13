@@ -27,16 +27,12 @@
         <span class="c-worktype__text">個人開発</span>
       </span>
       <span class="c-workPrice">
-        {{ $work->single_price_min }} ~ 
+        {{ $work->single_price_min }}円 ~ 
         {{ $work->single_price_max }}円
       </span>
     @elseif($work->type_id === $type['revsh'])
       <span class="p-work__type c-worktype">
         <span class="c-worktype__text">レベニューシェア</span>
-      </span>
-      
-      <span class="c-workPrice">
-        {{ $work->revenue_share_price }}円
       </span>
     @endif
     
@@ -59,24 +55,29 @@
      
   </ul>
 
+  <a href="{{ route('works.like',$work->id) }}" 
+    class="c-btn--like @if($work->likeUsers()->where('user_id',Auth::id())->exists()) is-liked @endif">
+    <i class="far fa-heart"></i>
+    <span>いいね</span>
+    <span>{{ $work->likeUsers()->count() }}</span>
+  </a>
+
   @if ($work->user_id !== Auth::id())
     @auth
-      <form method="POST" action="{{ route('work.apply','direct') }}">
+      <form method="POST" action="{{ route('works.apply',['work_id' => $work->id, 'user_id' => $work->user_id]) }}">
         @csrf
-        <input type="hidden" name="work_id" value="{{ $work->id }}">
-        <input type="hidden" name="user_id" value="{{ $work->user_id }}">
 
         <section class="p-work__btn">
-          <button type="submit" class="c-btn c-btn--medium c-btn--apply" @if($is_applied) disabled @endif>
-            @if($is_applied) 応募済み @else 応募する @endif
+          <button type="submit" class="c-btn c-btn--medium @if($is_applied) c-btn--apply--disabled @else c-btn--apply @endif">
+            @if($is_applied) 応募を取り消す @else 応募する @endif
           </button>
         </section>
 
         @if ($is_applied)
             <section class="p-work__btn">
-              <button class="c-btn c-btn--medium c-btn--apply">
-                <a href="{{ route('message.show',['message_type' => 'direct', 'w' => $work->id, 'u' => $work->user_id]) }}">投稿者にメッセージする</a>
-              </button>
+              <a class="c-btn c-btn--medium c-btn--apply" href="{{ route('message.show',['message_type' => 'direct', 'w' => $work->id, 'u' => $work->user_id]) }}">
+                投稿者にメッセージする
+              </a>
             </section>
         @endif
         
@@ -85,20 +86,27 @@
 
     @else
       <section class="p-work__btn">
-        <button class="c-btn c-btn--medium c-btn--apply">
-          <a href="{{ route('register') }}">登録して応募する</a>
-        </button>
+        <a class="c-btn c-btn--medium c-btn--apply" href="{{ route('register') }}">
+          登録して応募する
+        </a>
       </section>
     @endauth
     
   @else
 
   <section class="p-work__btn">
-    <button class="c-btn c-btn--medium c-btn--edit">
-      <a href="{{ route('works.edit',$work->id) }}">編集</a>
-    </button>
+    <a class="p-work__btn__item c-btn c-btn--medium c-btn--edit" href="{{ route('works.edit',$work->id) }}">
+      編集
+    </a>
+
+    <form action="{{ route('works.delete',$work->id) }}" method="POST" class="p-work__btn__item">
+      @csrf
+      <button class="c-btn c-btn--medium c-btn--destroy" onclick='return confirm("この案件を削除しますか？");' >
+        削除
+      </button>
+    </form>
   </section>
-    
+
   @endif
   
   <message-item

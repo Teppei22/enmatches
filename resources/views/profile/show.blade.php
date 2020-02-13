@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','プロフィール')
+@section('title',$user->name.'さんのプロフィール')
 
 @section('content')
 <div class="p-register">

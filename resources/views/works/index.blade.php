@@ -50,7 +50,7 @@
             </div>
 
             <div class="p-works__search__tools">
-              <h3 class="p-works__search__tools__title">報酬金額で絞る</h3>
+              <h3 class="p-works__search__tools__title">単発案件の報酬金額で絞る</h3>
               <div class="p-works__search__price">
                 <input class="p-works__search__price__number" type="number" name="min_price" step="1000" value="{{ session('min_price') }}"> 円以上 ~ 
                 <br>
@@ -100,9 +100,13 @@
                   >
                   </work-item>
               @endforeach
-
+              
             </section>
           @endif
+          
+          <div class="p-works__pagination">
+            {{ $works->links() }}
+          </div>
 
           
         </div>

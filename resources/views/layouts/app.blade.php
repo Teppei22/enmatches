@@ -126,7 +126,7 @@
                             </li>
                         @else
                             <li>
-                                <a href="{{ route('mypage') }}">{{ Auth::user()->name }}</a>
+                                <a href="{{ route('mypage') }}">{{ __('Mypage') }}</a>
                             </li>
                             <li>
                                 <a href="{{ route('works.index') }}">{{ __('Search Work') }}</a>
@@ -152,6 +152,15 @@
         </div>
     </header>
     <main id="app" class="wrapper">
+
+        @if (session('flash_message'))
+            <div class="c-flash-message js-flash-message" role="alert">
+                <div class="c-flash-message__text">
+                    {{ session('flash_message') }}
+                </div>
+            </div>
+        @endif
+
         @yield('side_content')
         @yield('content')
     </main>

@@ -18,7 +18,7 @@
                             <label for="email" class="p-form__title">{{ __('E-Mail Address') }}</label>
 
                             <div class="p-form__content">
-                                <input id="email" type="email" class="p-form__input--text @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="p-form__input--text @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
 
                                 @error('email')
                                     <div class="p-form__item--error" role="alert">
@@ -32,7 +32,7 @@
                             <label for="password" class="p-form__title">{{ __('Password') }}</label>
 
                             <div class="p-form__content">
-                                <input id="password" type="password" class="p-form__input--text @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="p-form__input--text @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
 
                                 @error('password')
                                     <div class="p-form__item--error" role="alert">

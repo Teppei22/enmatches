@@ -69,18 +69,18 @@
 
   @guest
     <section class="p-top-section">
-        <button class="c-btn c-btn--medium c-btn--catch p-top-section--button">
-          <a href="{{ route('register') }}">登録する</a>
-        </button>
+        <a class="c-btn c-btn--medium c-btn--catch p-top-section--button" href="{{ route('register') }}">
+          登録する
+        </a>
     </section>
 
     <section class="c-btn c-btn--float js-float-button">
-      <button class="c-btn c-btn--medium c-btn--catch c-btn c-btn--float__item">
-        <a href="{{ route('register') }}">登録する</a>
-      </button>
-      <button class="c-btn c-btn--medium c-btn--login c-btn c-btn--float__item">
-        <a href="{{ route('login') }}">ログイン</a>
-      </button>
+      <a class="c-btn c-btn--medium c-btn--catch c-btn c-btn--float__item" href="{{ route('register') }}">
+        登録する
+      </a>
+      <a class="c-btn c-btn--medium c-btn--login c-btn c-btn--float__item" href="{{ route('login') }}">
+        ログイン
+      </a>
     </section>
 
   @endguest

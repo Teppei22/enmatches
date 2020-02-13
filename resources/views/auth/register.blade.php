@@ -18,7 +18,7 @@
                             <label for="name" class="p-form__title">{{ __('Name') }}</label>
 
                             <div class="p-form__content">
-                                <input id="name" type="text" class="p-form__input--text @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="p-form__input--text @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus>
 
                                 @error('name')
                                     <div class="c-dialog--err" role="alert">
@@ -32,7 +32,7 @@
                             <label for="email" class="p-form__title">{{ __('E-Mail Address') }}</label>
 
                             <div class="p-form__content">
-                                <input id="email" type="email" class="p-form__input--text @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="p-form__input--text @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email">
 
                                 @error('email')
                                     <div class="c-dialog--err" role="alert">
@@ -46,7 +46,7 @@
                             <label for="password" class="p-form__title">{{ __('Password') }}</label>
 
                             <div class="p-form__content">
-                                <input id="password" type="password" class="p-form__input--text @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="p-form__input--text @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">
 
                                 @error('password')
                                     <div class="c-dialog--err" role="alert">
@@ -60,7 +60,7 @@
                             <label for="password-confirm" class="p-form__title">{{ __('Confirm Password') }}</label>
 
                             <div class="p-form__content">
-                                <input id="password-confirm" type="password" class="p-form__input--text" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="p-form__input--text" name="password_confirmation"  autocomplete="new-password">
                             </div>
                         </div>
 

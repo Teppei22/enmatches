@@ -16,7 +16,6 @@
 
                             <div class="p-form__content">
                                 <label for="thumbnail" class="p-form__content--img js-area-drop @error('thumbnail') is-invalid @enderror">
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="">
                                     <input type="file" name="thumbnail" class="p-form__input--file js-input-file">
                                     <img class="p-form__input--prev-img js-prev-img" src="@if(!empty($user->thumbnail)){{ $user->thumbnail }}@else{{ asset("images/default_user.jpg") }}@endif">
                                         
@@ -39,6 +38,20 @@
                                 <input id="name" type="text" class="p-form__input--text @error('name') is-invalid @enderror" name="name" value="{{ old('name',$user->name) }}" autocomplete="name" autofocus>
 
                                 @error('name')
+                                    <div class="c-dialog--err" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="p-form__item">
+                            <label for="email" class="p-form__title">メールアドレス</label>
+
+                            <div class="p-form__content">
+                                <input id="email" type="text" class="p-form__input--text @error('email') is-invalid @enderror" name="email" value="{{ old('email',$user->email) }}" autocomplete="email" autofocus>
+
+                                @error('email')
                                     <div class="c-dialog--err" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </div>

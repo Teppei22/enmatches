@@ -50,13 +50,12 @@
 {{-- Subcopy --}}
 @isset($actionText)
 @slot('subcopy')
-@lang(
-    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser: [:actionURL](:actionURL)',
-    [
-        'actionText' => $actionText,
-        'actionURL' => $actionUrl,
-    ]
+@lang("message.Mail.Notify.NotClick",
+        [
+            'actionText' => $actionText,
+            'actionURL' => $actionUrl,
+        ]
+    )
 )
 @endslot
 @endisset

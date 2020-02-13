@@ -20,7 +20,7 @@
                             <label for="email" class="p-form__title">{{ __('E-Mail Address') }}</label>
 
                             <div class="p-form__content">
-                                <input id="email" type="email" class="p-form__input--text @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="p-form__input--text @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
 
                                 @error('email')
                                     <div class="p-form__item--error" role="alert">
