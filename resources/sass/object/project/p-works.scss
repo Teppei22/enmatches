@@ -57,6 +57,7 @@
   }
   &__list{
     margin-top: 10px;
+    border-bottom: 1px solid $gray;
     &--empty{
       text-align: center;
       height: 200px;

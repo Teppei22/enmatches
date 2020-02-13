@@ -23,7 +23,7 @@
       color: $gray-dark;
     }
   }
-  &__content{
+  &__body{
     max-width: 75%;
   }
   &__name{
@@ -42,6 +42,7 @@
     border: 1px solid black;
     white-space:pre-wrap;
     line-height: 1.3;
+    overflow-wrap: break-word;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;

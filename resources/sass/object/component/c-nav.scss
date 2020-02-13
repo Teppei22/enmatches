@@ -1,6 +1,6 @@
 .c-nav{
   display: none;
-  @include mq-down(){
+  @include mq-down(md){
     display: block;
     position: absolute;
     top: 0;
@@ -32,7 +32,7 @@
     &__link{
       -webkit-font-smoothing: initial;
     }
-    @include mq-down() {
+    @include mq-down(md) {
       display: block;
       &__item {
         margin-right: initial;
@@ -44,7 +44,7 @@
       }
     }
     &__triger{
-      @include mq-up(){
+      @include mq-up(md){
         display: none;
       }
       display: inline-block;

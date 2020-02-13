@@ -1,0 +1,58 @@
+.c-pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__prev-btn{
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    vertical-align: middle;
+    a{
+      &:hover{
+        text-decoration: underline;
+        color: $blue-dark;
+      }
+        
+    }
+  }
+  &__next-btn{
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    vertical-align: middle;
+    font-size: 15px;
+    a{
+      &:hover{
+        text-decoration: underline;
+        color: $blue-dark;
+      }
+        
+    }
+    
+  }
+  &__item{
+    height: 50px;
+    width: 50px;
+    color: $blue;
+    text-align: center;
+    line-height: 50px;
+    vertical-align: middle;
+    &:hover{
+      cursor: pointer;
+      background: $gray-light;
+    }
+    a{
+      height: 100%;
+      display: block;
+    }
+    &.is-active{
+      color: $black;
+      &:hover{
+        background: inherit;
+        pointer-events: none;
+      }
+    }
+  }
+}

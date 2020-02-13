@@ -19,7 +19,7 @@
   }
   &__nav{
     letter-spacing: 2px;
-    @include mq-down(){
+    @include mq-down(md){
       display: none;
     }
   }

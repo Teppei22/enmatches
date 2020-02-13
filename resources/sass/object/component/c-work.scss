@@ -5,7 +5,6 @@
     margin: 0 auto;
     &__item{
       border-top: 1px solid $gray;
-      // border-bottom: 1px solid $gray;
     }
   }
   &__content{
@@ -14,7 +13,8 @@
   &__title{
     font-size: 17px;
     font-weight: bold;
-    color: $dark-blue;
+    color: $blue-dark;
+    overflow-wrap: break-word;
   }
   &__type{
     font-size: 14px;
@@ -52,7 +52,7 @@
     -ms-border-radius: 2px;
     -o-border-radius: 2px;
     &__text{
-      font-size: 12px;
+      font-size: 18px;
       color: #5ca611;
       font-weight: bold;
       display: block;
@@ -62,10 +62,12 @@
     font-size: 32px;
     font-weight: bold;
     color: $red;
+    overflow-wrap: break-word;
   }
 
   &Detail{
     padding: 0 15px;
+    overflow-wrap: break-word;
     
     &__description{
       font-size: 18px;
@@ -83,6 +85,9 @@
       }
     }
     &__button{
+      display: flex;
+      justify-content: space-between;
+      // width: 170px;
     }
   }
   

@@ -27,12 +27,14 @@
       font-size: 20px;
       font-weight: bold;
       padding: 5px 10px;
-      overflow: auto;
+      overflow-wrap: break-word;
     }
     &-type{
       font-weight: bold;
       font-size: 20px;
-      padding: 5px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
       background: $blue;
     }
     &__link{
@@ -64,6 +66,7 @@
     padding-left: 10px;
     height: 40px;
     flex-grow: 1;
+    overflow: hidden;
   }
   &__name{
     overflow: hidden;
@@ -75,6 +78,7 @@
   }
   &__date{
     color: $gray-dark;
+    white-space: nowrap;
   }
   &__msg{
     overflow: hidden;

@@ -14,6 +14,7 @@
   }
   &--chat{
     @include badge-width_height($value--chat);
+    flex-shrink: 0;
   }
   &--mypage{
     @include badge-width_height($value--mypage);

@@ -1,6 +1,10 @@
 .p-work{
   background: $white;
   padding: 15px 8px;
+  &__title{
+    overflow-wrap: break-word;
+    line-height: 1.2;
+  }
   &__type{
     margin-right: 20px;
   }
@@ -9,7 +13,12 @@
     margin: 20px 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    @include mq-down(){
+      height: 100px;
+      flex-direction: column;
+      align-content: space-around;
+    }
   }
 
   &__date{
@@ -22,8 +31,9 @@
     }
   }
   &__btn{
-    display: flex;
-    justify-content: center;
-    margin: 10px 0;
+    margin: 20px 0;
+    &__item{
+      margin: 10px 0;
+    }
   }
 }
