@@ -127,9 +127,13 @@ return [
     */
 
     'custom' => [
-        '属性名' => [
-            'ルール名' => 'カスタムメッセージ',
+        'email' => [
+            'unique' => 'このメールアドレスは利用できません。',
         ],
+        'thumbnail' => [
+            'max' => 'ファイルは3MB以下にしてください。',
+        ]
+
     ],
 
     /*
@@ -146,6 +150,8 @@ return [
     'attributes' => [
         // profilerequest
         'name' => '名前',
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
         'thumbnail' => 'サムネイル画像',
         'description' => '案件詳細',
         // workrequest
