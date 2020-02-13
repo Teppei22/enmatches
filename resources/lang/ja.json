@@ -7,6 +7,7 @@
   "Password": "パスワード",
   "Reset Password": "パスワードリセット",
   "Register": "登録",
+  "Registered": "登録しました",
   "Member Register": "会員登録",
   "Update": "更新",
   "Remember Me": "次回から自動的にログイン",
@@ -32,11 +33,13 @@
   "Profile": "プロフィール",
   "Edit Profile": "プロフィール編集",
   "Change": "変更",
+  "Changed": "変更しました",
+  "Delete": "削除",
+  "Deleted": "削除しました",
   "Hello!": "お知らせ",
   "Reset password": "パスワード再設定",
+  "email.Notify.Footer": "",
   "Click button below and reset password.": "ボタンをクリックしてパスワードを再設定してください。",
   "If you did not request a password reset, no further action is required.": "このメールに心当たりがない場合は、このまま削除してください。",
-  "If you’re having trouble clicking the button above, copy and paste the URL below.": "ボタンがクリックできない場合は、下のURLをコピーしてブラウザのアドレス欄に貼り付け、直接アクセスしてください。",
-  "into your web browser: ": "ブラウザでアクセス：",
   "Page Not Found": "お探しのページは見つかりませんでした"
 }

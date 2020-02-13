@@ -18,6 +18,7 @@ require('./assets/live_preview_img');
 require('./assets/change_tab');
 require('./assets/sp_nav_menu');
 require('./assets/float_button');
+require('./assets/flash_message');
 
 Vue.prototype.axios = axios;
 // Vue.prototype.sanitize = sanitizeHTML;

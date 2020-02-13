@@ -1310,7 +1310,6 @@ var _default = {
   data: function data() {
     return {};
   },
-  computed: {},
   methods: {
     // 案件の種類を返す
     getWorkType: function getWorkType(work) {
@@ -1575,6 +1574,27 @@ exports["default"] = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   props: ['self_user_id', 'partner_user_id', 'message_type', 'work'],
   data: function data() {
@@ -1586,7 +1606,8 @@ var _default = {
         'left': false
       },
       users: {},
-      messages: []
+      messages: [],
+      max_str_length: 200
     };
   },
   mounted: function mounted() {
@@ -1598,10 +1619,15 @@ var _default = {
       this.setScrollToEnd();
     }
   },
+  computed: {
+    countMessage: function countMessage() {
+      return this.new_message.replace(/(\n|\r)/g, "").length;
+    }
+  },
   methods: {
     // 対応メッセージを持ってくる
     fetchMsgs: function fetchMsgs() {
-      var _this = this;
+      var self = this;
 
       if (this.$props.message_type === 'public') {
         axios.get('/ajax/messages', {
@@ -1610,7 +1636,7 @@ var _default = {
             work_id: this.$props.work.id
           }
         }).then(function (res) {
-          _this.messages = res.data; //←取得したMessageリストをmessagesに格納
+          self.messages = res.data; //←取得したMessageリストをmessagesに格納
         });
       } else if (this.$props.message_type === 'direct') {
         axios.get('/ajax/messages', {
@@ -1620,7 +1646,7 @@ var _default = {
             partner_id: this.$props.partner_user_id
           }
         }).then(function (res) {
-          _this.messages = res.data; //←取得したMessageリストをmessagesに格納
+          self.messages = res.data; //←取得したMessageリストをmessagesに格納
         });
       }
     },
@@ -1666,12 +1692,16 @@ var _default = {
     },
     // メッセージを保存
     addMsg: function addMsg() {
-      var _this2 = this;
-
+      // this.new_message = this.new_message.replace(/(\n|\r)/g, "");
       if (!this.new_message || this.self_user_id === null) {
         return;
       }
 
+      if (this.countMessage > this.max_str_length) {
+        return;
+      }
+
+      var self = this;
       axios.post('/ajax/messages', {
         work_id: this.$props.work.id,
         message_type_key: this.$props.message_type,
@@ -1679,8 +1709,8 @@ var _default = {
         from_user_id: this.$props.self_user_id,
         to_user_id: this.$props.message_type === 'direct' ? this.$props.partner_user_id : null
       }).then(function (res) {
-        _this2.messages = res.data;
-        _this2.new_message = '';
+        self.messages = res.data;
+        self.new_message = '';
       });
     },
     // messageのcreated_atの日時を表示
@@ -1734,6 +1764,8 @@ __webpack_require__(44);
 
 __webpack_require__(45);
 
+__webpack_require__(46);
+
 _vue["default"].prototype.axios = _axios["default"]; // Vue.prototype.sanitize = sanitizeHTML;
 
 _vue["default"].prototype.$ = _jquery["default"];
@@ -1747,11 +1779,11 @@ _vue["default"].prototype.$ = _jquery["default"];
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-_vue["default"].component('work-item', __webpack_require__(46)["default"]);
+_vue["default"].component('work-item', __webpack_require__(47)["default"]);
 
-_vue["default"].component('message-list', __webpack_require__(49)["default"]);
+_vue["default"].component('message-list', __webpack_require__(50)["default"]);
 
-_vue["default"].component('message-item', __webpack_require__(52)["default"]);
+_vue["default"].component('message-item', __webpack_require__(53)["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -25434,30 +25466,30 @@ $(function () {
 "use strict";
 
 
-// 案件種類のselect-inputによって単価の種類を変化
+// 案件種類のselect-inputによって単価表示を変化
 $(function () {
-  var target = $('.js-type_select').val();
-  var $single = $('.js-single_price');
-  var $revsh = $('.js-revsh_price');
+  var select_val = $('.js-type_select').val();
+  var $work_price = $('.js-work_price');
 
-  if (target === '1') {
-    $single.show();
-    $revsh.hide();
-  } else if (target === '2') {
-    $single.hide();
-    $revsh.show();
+  if (select_val === '1') {
+    $work_price.show();
+  } else if (select_val === '2') {
+    $work_price.hide();
   }
 
   $('.js-type_select').change(function () {
-    target = $(this).val();
+    select_val = $(this).val();
 
-    if (target === '1') {
-      $single.show();
-      $revsh.hide();
-    } else if (target === '2') {
-      $single.hide();
-      $revsh.show();
+    if (select_val === '1') {
+      // 単発案件
+      $work_price.show();
+    } else if (select_val === '2') {
+      // レベニューシェア案件
+      $work_price.hide();
     }
+
+    $('.js-price-min').val(null);
+    $('.js-price-max').val(null);
   });
 });
 
@@ -25568,11 +25600,24 @@ $(function () {
 
 /***/ }),
 /* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+$(function () {
+  setTimeout(function () {
+    $('.js-flash-message').fadeOut('slow');
+  }, 2000);
+});
+
+/***/ }),
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__WorkItemComponent_vue_vue_type_template_id_57820c3e___ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__WorkItemComponent_vue_vue_type_template_id_57820c3e___ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__WorkItemComponent_vue_vue_type_script_lang_js___ = __webpack_require__(12);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_1__WorkItemComponent_vue_vue_type_script_lang_js___) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_1__WorkItemComponent_vue_vue_type_script_lang_js___[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_componentNormalizer_js__ = __webpack_require__(3);
@@ -25617,17 +25662,17 @@ component.options.__file = "resources/js/components/WorkItemComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkItemComponent_vue_vue_type_template_id_57820c3e___ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkItemComponent_vue_vue_type_template_id_57820c3e___ = __webpack_require__(49);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkItemComponent_vue_vue_type_template_id_57820c3e___["a"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkItemComponent_vue_vue_type_template_id_57820c3e___["b"]; });
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25699,17 +25744,12 @@ var render = function() {
               ? [
                   _c("div", { staticClass: "c-work__status__button" }, [
                     _c(
-                      "button",
-                      { staticClass: "c-btn c-btn--small c-btn--edit" },
-                      [
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "/works/" + _vm.work.id + "/edit" }
-                          },
-                          [_vm._v("編集")]
-                        )
-                      ]
+                      "a",
+                      {
+                        staticClass: "c-btn c-btn--small c-btn--edit",
+                        attrs: { href: "/works/" + _vm.work.id + "/edit" }
+                      },
+                      [_vm._v("\n              編集\n            ")]
                     )
                   ])
                 ]
@@ -25757,12 +25797,12 @@ render._withStripped = true
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MessageListComponent_vue_vue_type_template_id_1477b3ba___ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MessageListComponent_vue_vue_type_template_id_1477b3ba___ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MessageListComponent_vue_vue_type_script_lang_js___ = __webpack_require__(14);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_1__MessageListComponent_vue_vue_type_script_lang_js___) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_1__MessageListComponent_vue_vue_type_script_lang_js___[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_componentNormalizer_js__ = __webpack_require__(3);
@@ -25807,17 +25847,17 @@ component.options.__file = "resources/js/components/MessageListComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MessageListComponent_vue_vue_type_template_id_1477b3ba___ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MessageListComponent_vue_vue_type_template_id_1477b3ba___ = __webpack_require__(52);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MessageListComponent_vue_vue_type_template_id_1477b3ba___["a"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MessageListComponent_vue_vue_type_template_id_1477b3ba___["b"]; });
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25849,7 +25889,7 @@ var render = function() {
               2
             ),
             _vm._v(" "),
-            works.length === 0
+            !works.length
               ? _c(
                   "section",
                   { staticClass: "c-chat__work--not-found" },
@@ -25903,7 +25943,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          work.public_latest_message.length !== 0
+                          work.public_latest_message
                             ? _c("div", { staticClass: "c-chat__item" }, [
                                 _c("div", { staticClass: "c-badge--chat" }, [
                                   _c(
@@ -25969,7 +26009,7 @@ var render = function() {
                         _vm._v("\n            ダイレクトメッセージ\n          ")
                       ]),
                       _vm._v(" "),
-                      index === "posted" && work.apply_users.length === 0
+                      index === "posted" && !work.apply_users.length
                         ? _c(
                             "div",
                             { staticClass: "c-chat__item--not-found" },
@@ -25981,7 +26021,7 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      index === "posted" && work.apply_users
+                      index === "posted" && work.apply_users.length
                         ? _vm._l(work.apply_users, function(user) {
                             return _c(
                               "section",
@@ -26186,12 +26226,12 @@ render._withStripped = true
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MessageItemComponent_vue_vue_type_template_id_c40a7c64___ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MessageItemComponent_vue_vue_type_template_id_c40a7c64___ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MessageItemComponent_vue_vue_type_script_lang_js___ = __webpack_require__(16);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_1__MessageItemComponent_vue_vue_type_script_lang_js___) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_1__MessageItemComponent_vue_vue_type_script_lang_js___[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_componentNormalizer_js__ = __webpack_require__(3);
@@ -26236,17 +26276,17 @@ component.options.__file = "resources/js/components/MessageItemComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MessageItemComponent_vue_vue_type_template_id_c40a7c64___ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MessageItemComponent_vue_vue_type_template_id_c40a7c64___ = __webpack_require__(55);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MessageItemComponent_vue_vue_type_template_id_c40a7c64___["a"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MessageItemComponent_vue_vue_type_template_id_c40a7c64___["b"]; });
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26261,22 +26301,38 @@ var render = function() {
       "div",
       { ref: "list", staticClass: "c-message__list" },
       [
-        _vm.message_type === "direct" && _vm.messages.length === 0
+        _vm.messages.length === 0
           ? [
-              _vm.work.user_id == _vm.self_user_id
-                ? _c("section", { staticClass: "c-message__item--none" }, [
-                    _vm._v(
-                      "\n        メッセージであなたの要望を伝えましょう!\n      "
-                    )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.work.user_id !== _vm.self_user_id
-                ? _c("section", { staticClass: "c-message__item--none" }, [
-                    _vm._v(
-                      "\n        メッセージであなたをアピールしましょう!\n      "
-                    )
-                  ])
+              _vm.message_type === "direct"
+                ? [
+                    _vm.work.user_id == _vm.self_user_id
+                      ? _c(
+                          "section",
+                          { staticClass: "c-message__item--none" },
+                          [
+                            _vm._v(
+                              "\n          メッセージであなたの要望を伝えましょう!\n        "
+                            )
+                          ]
+                        )
+                      : _c(
+                          "section",
+                          { staticClass: "c-message__item--none" },
+                          [
+                            _vm._v(
+                              "\n          メッセージであなたをアピールしましょう!\n        "
+                            )
+                          ]
+                        )
+                  ]
+                : _vm.message_type === "public"
+                ? [
+                    _c("section", { staticClass: "c-message__item--none" }, [
+                      _vm._v(
+                        "\n          パブリックメッセージはまだありません\n        "
+                      )
+                    ])
+                  ]
                 : _vm._e()
             ]
           : _vm._e(),
@@ -26310,7 +26366,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "c-message__content" }, [
+                    _c("div", { staticClass: "c-message__body" }, [
                       _c(
                         "span",
                         { staticClass: "c-message__name --msg-right" },
@@ -26353,7 +26409,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "c-message__content" }, [
+                    _c("div", { staticClass: "c-message__body" }, [
                       _c(
                         "span",
                         { staticClass: "c-message__name --msg-left" },
@@ -26376,53 +26432,68 @@ var render = function() {
       2
     ),
     _vm._v(" "),
-    _c(
-      "form",
-      {
-        staticClass: "c-message__form",
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-          }
-        }
-      },
-      [
-        _c("div", { staticClass: "c-message__input" }, [
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.new_message,
-                expression: "new_message"
-              }
-            ],
-            staticClass: "c-message__input-textarea",
-            attrs: { placeholder: "丁寧なコメントを心がけましょう" },
-            domProps: { value: _vm.new_message },
+    _vm.self_user_id
+      ? _c(
+          "form",
+          {
+            staticClass: "c-message__form",
             on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.new_message = $event.target.value
+              submit: function($event) {
+                $event.preventDefault()
               }
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "c-message__btn" }, [
-          _c(
-            "button",
-            {
-              staticClass: "c-btn c-btn--medium c-btn--comment",
-              on: { click: _vm.addMsg }
-            },
-            [_vm._v("\n        コメント\n      ")]
-          )
-        ])
-      ]
-    )
+          },
+          [
+            _c("div", { staticClass: "c-message__input" }, [
+              _vm._v(
+                "\n\n      " +
+                  _vm._s(_vm.countMessage) +
+                  " / " +
+                  _vm._s(this.max_str_length) +
+                  "\n      "
+              ),
+              _vm.countMessage > this.max_str_length
+                ? _c("span", { staticStyle: { color: "red" } }, [
+                    _vm._v("文字数が超過しています。")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.new_message,
+                    expression: "new_message"
+                  }
+                ],
+                staticClass: "c-message__input-textarea",
+                attrs: { placeholder: "丁寧なコメントを心がけましょう" },
+                domProps: { value: _vm.new_message },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.new_message = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "c-message__btn" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "c-btn c-btn--medium c-btn--comment",
+                  on: { click: _vm.addMsg }
+                },
+                [_vm._v("\n        コメント\n      ")]
+              )
+            ])
+          ]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

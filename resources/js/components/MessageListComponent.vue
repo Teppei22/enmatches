@@ -6,7 +6,7 @@
           <template v-if="index==='posted'">投稿案件</template>
           <template v-else-if="index==='applied'">応募案件</template>
         </div>
-        <section v-if="works.length === 0" class="c-chat__work--not-found">
+        <section v-if="!works.length" class="c-chat__work--not-found">
           <template v-if="index==='posted'">登録された案件はありません</template>
           <template v-else-if="index==='applied'">応募した案件はありません</template>
         </section>
@@ -23,7 +23,7 @@
                 <div class="c-chat__msg-type" :class="{'c-chat__msg-type--msg-not-found': !work.public_latest_message}">
                   パブリックメッセージ
                 </div>
-                <div v-if="work.public_latest_message.length !== 0" class="c-chat__item">
+                <div v-if="work.public_latest_message" class="c-chat__item">
                     <div class="c-badge--chat">
                       <div class="c-badge__content--chat">
                         <img :src="showImage(work.public_latest_message.from_user)" :class="'c-badge__img js-getImg'+work.public_latest_message.from_user_id">
@@ -50,11 +50,11 @@
               ダイレクトメッセージ
             </div>
 
-            <div v-if="index==='posted' && work.apply_users.length === 0" class="c-chat__item--not-found">
+            <div v-if="index==='posted' && !work.apply_users.length" class="c-chat__item--not-found">
               まだ応募者がいません
             </div>
 
-            <template v-if="index === 'posted' && work.apply_users">
+            <template v-if="index === 'posted' && work.apply_users.length">
               <section v-for="user in work.apply_users" :key="user.id" class="c-chat__work-contents">
                 <a :href="'/message/direct?w='+work.id+'&u='+user.id" class="c-chat__item">
                   <div class="c-badge--chat">

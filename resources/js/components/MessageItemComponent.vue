@@ -1,14 +1,28 @@
 <template>
     <div class="c-message">
       <div class="c-message__list" ref="list">
-        <template v-if="message_type === 'direct' && messages.length === 0">
-          <section class="c-message__item--none" v-if="work.user_id == self_user_id">
-            メッセージであなたの要望を伝えましょう!
-          </section>
-          <section class="c-message__item--none" v-if="work.user_id !== self_user_id">
-            メッセージであなたをアピールしましょう!
-          </section>
+
+        <template v-if="messages.length === 0">
+          <template v-if="message_type === 'direct'">
+
+            <section class="c-message__item--none" v-if="work.user_id == self_user_id">
+              メッセージであなたの要望を伝えましょう!
+            </section>
+            <section class="c-message__item--none" v-else>
+              メッセージであなたをアピールしましょう!
+            </section>
+
+          </template>
+
+          <template v-else-if="message_type === 'public'">
+            <section class="c-message__item--none">
+              パブリックメッセージはまだありません
+            </section>
+          </template>
+
         </template>
+
+        
         
         <template v-for="msg in messages">
 
@@ -21,12 +35,14 @@
                 </a>
               </div>
             </div>
-            <div class="c-message__content">
+            <div class="c-message__body">
               <span class="c-message__name --msg-right">{{ msg.from_user_name }}</span>
               <p class="c-message__text">{{ msg.text }}</p>
+              
             </div>
-            
             <div class="c-message__date">{{ getTime(msg) }}</div>
+            
+            
           </section>
 
           <section v-else v-bind:key="msg.id"
@@ -39,7 +55,7 @@
               </div>
               
             </div>
-            <div class="c-message__content">
+            <div class="c-message__body">
               <span class="c-message__name --msg-left">{{ msg.from_user_name }}</span>
               <p class="c-message__text">{{ msg.text }}</p>
             </div>
@@ -51,8 +67,13 @@
 
       </div>
       
-      <form class="c-message__form" v-on:submit.prevent>
+      <form v-if="self_user_id" class="c-message__form" v-on:submit.prevent>
         <div class="c-message__input">
+
+          {{ countMessage }} / {{ this.max_str_length }}
+          <span v-if="countMessage > this.max_str_length" style="color: red">文字数が超過しています。</span>
+          
+
           <textarea v-model="new_message" class="c-message__input-textarea" placeholder="丁寧なコメントを心がけましょう">
           </textarea>
         </div>
@@ -78,7 +99,8 @@
           'left': false
         },
         users:{},
-        messages: []
+        messages: [],
+        max_str_length: 200
       };
     },
     mounted(){
@@ -87,20 +109,26 @@
     },
     watch: {
       messages: function(){
-        this.setScrollToEnd()
+        this.setScrollToEnd();
+      }
+    },
+    computed: {
+      countMessage: function(){
+        return this.new_message.replace(/(\n|\r)/g, "").length;
       }
     },
     methods: {
       // 対応メッセージを持ってくる
       fetchMsgs: function () {
+        var self = this;
         if(this.$props.message_type === 'public'){
           axios.get('/ajax/messages', {
             params:{
               message_type_key: 'public',
               work_id: this.$props.work.id
             }
-          }).then((res) => {
-            this.messages = res.data //←取得したMessageリストをmessagesに格納
+          }).then(function(res) {
+            self.messages = res.data; //←取得したMessageリストをmessagesに格納
 
           })
         }else if(this.$props.message_type === 'direct'){
@@ -110,8 +138,8 @@
               work_id: this.$props.work.id,
               partner_id: this.$props.partner_user_id
             }
-          }).then((res) => {
-            this.messages = res.data //←取得したMessageリストをmessagesに格納
+          }).then(function(res){
+            self.messages = res.data; //←取得したMessageリストをmessagesに格納
           })
         }
         
@@ -162,9 +190,16 @@
       },
       // メッセージを保存
       addMsg: function(){
+        // this.new_message = this.new_message.replace(/(\n|\r)/g, "");
+
         if (!this.new_message || this.self_user_id === null) {
-          return
+          return;
         }
+        if(this.countMessage > this.max_str_length){
+          return;
+        }
+
+        var self = this;
         axios.post('/ajax/messages', {
           work_id: this.$props.work.id,
           message_type_key: this.$props.message_type,
@@ -172,22 +207,22 @@
           from_user_id: this.$props.self_user_id,
           to_user_id: (this.$props.message_type === 'direct') ? this.$props.partner_user_id : null
         })
-        .then((res) => {
-          this.messages = res.data
-          this.new_message = ''
+        .then(function(res) {
+          self.messages = res.data;
+          self.new_message = '';
         })
         
       },
       // messageのcreated_atの日時を表示
       getTime: function(msg){
-        var day_time = msg.created_at.slice(5,-3)
-        return day_time
+        var day_time = msg.created_at.slice(5,-3);
+        return day_time;
       },
       // ユーザのプロフィール画像を表示する
       showImage: function(user){
-        var img = new Image()
+        var img = new Image();
 
-        img.src = (user.thumbnail) ? user.thumbnail : '/images/default_user.jpg'
+        img.src = (user.thumbnail) ? user.thumbnail : '/images/default_user.jpg';
 
         return img.src;
       }

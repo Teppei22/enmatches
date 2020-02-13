@@ -29,9 +29,9 @@
 
           <template v-if="post_flg === 1">
             <div class="c-work__status__button">
-              <button class="c-btn c-btn--small c-btn--edit">
-                <a :href="'/works/'+work.id+'/edit'">編集</a>
-              </button>
+              <a :href="'/works/'+work.id+'/edit'" class="c-btn c-btn--small c-btn--edit">
+                編集
+              </a>
             </div>
           </template>
 
@@ -58,14 +58,10 @@
     export default {
       // post_flg: 1(投稿者), 0それ以外
       props: ['work','apply_count','post_flg'],
-
       data: function(){
         return{
 
         };
-      },
-      computed: {
-        
       },
       methods: {
         // 案件の種類を返す
