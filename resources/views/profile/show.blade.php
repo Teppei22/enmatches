@@ -5,7 +5,7 @@
 @section('content')
 <div class="p-register">
     <div class="p-register__container l-container">
-        <div class="p-register__header l-container__header"><h1>{{ __('Profile') }}</h1></div>
+        <div class="p-register__header l-container__header"><h1>{{ $user->name }}{{ __("'s ") }}{{ __('Profile') }}</h1></div>
         <div class="p-register__contents">
             <div class="p-form__section">
                 <div class="p-form__section__contents">

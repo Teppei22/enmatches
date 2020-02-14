@@ -52,7 +52,7 @@
     }
     @include mq-down(){
       flex-direction: column;
-      bottom: 100px;
+      bottom: 50px;
     }
   }
   &:hover{

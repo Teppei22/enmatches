@@ -9,7 +9,7 @@
               メッセージであなたの要望を伝えましょう!
             </section>
             <section class="c-message__item--none" v-else>
-              メッセージであなたをアピールしましょう!
+              メッセージであなたを<br>アピールしましょう!
             </section>
 
           </template>

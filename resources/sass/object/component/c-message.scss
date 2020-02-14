@@ -21,6 +21,12 @@
       font-size: 18px;
       padding-top: 20px;
       color: $gray-dark;
+      line-height: 1.5;
+      br{
+        @include mq-up(){
+          display: none;
+        }
+      }
     }
   }
   &__body{

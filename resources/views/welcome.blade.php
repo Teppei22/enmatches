@@ -74,7 +74,7 @@
         </a>
     </section>
 
-    <section class="c-btn c-btn--float js-float-button">
+    <section class="c-btn--float js-float-button">
       <a class="c-btn c-btn--medium c-btn--catch c-btn c-btn--float__item" href="{{ route('register') }}">
         登録する
       </a>
@@ -125,8 +125,8 @@
           <div>
             <h4>※案件種類(単発案件/レベニューシェア)とは...</h4>
             <p>
-              支払い枠が固定されている<span>単発案件</span>と<br>
-              パートナーとして連携し、収益を分配する<span>レベニューシェア</span>があります。
+              支払い枠が固定されている<span><a href="{{ route('works.index',['sort'=>'single']) }}">単発案件</a></span>と<br>
+              パートナーとして連携し、収益を分配する<span><a href="{{ route('works.index',['sort'=>'revsh']) }}">レベニューシェア</a></span>があります。
             </p>
           </div>
         </div>

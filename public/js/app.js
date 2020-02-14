@@ -26319,9 +26319,9 @@ var render = function() {
                           "section",
                           { staticClass: "c-message__item--none" },
                           [
-                            _vm._v(
-                              "\n          メッセージであなたをアピールしましょう!\n        "
-                            )
+                            _vm._v("\n          メッセージであなたを"),
+                            _c("br"),
+                            _vm._v("アピールしましょう!\n        ")
                           ]
                         )
                   ]
