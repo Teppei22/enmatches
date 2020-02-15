@@ -25767,35 +25767,31 @@ var render = function() {
                   ])
                 ]
               : [
-                  _c(
-                    "div",
-                    { staticStyle: { display: "flex", "line-height": "30px" } },
-                    [
-                      _vm._v(
-                        "\n            " +
-                          _vm._s(_vm.work.post_user.name) +
-                          "\n            "
-                      ),
-                      _c("div", { staticClass: "c-badge--msg" }, [
-                        _c("div", { staticClass: "c-badge__content--msg" }, [
-                          _c(
-                            "a",
-                            { attrs: { href: "/user/" + _vm.work.user_id } },
-                            [
-                              _c("img", {
-                                class:
-                                  "c-badge__img js-getImg" + _vm.work.user_id,
-                                attrs: {
-                                  src: _vm.showImage(_vm.work.post_user),
-                                  alt: ""
-                                }
-                              })
-                            ]
-                          )
-                        ])
+                  _c("div", { staticClass: "c-work__status__user" }, [
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.work.post_user.name) +
+                        "\n            "
+                    ),
+                    _c("div", { staticClass: "c-badge--msg" }, [
+                      _c("div", { staticClass: "c-badge__content--msg" }, [
+                        _c(
+                          "a",
+                          { attrs: { href: "/user/" + _vm.work.user_id } },
+                          [
+                            _c("img", {
+                              class:
+                                "c-badge__img js-getImg" + _vm.work.user_id,
+                              attrs: {
+                                src: _vm.showImage(_vm.work.post_user),
+                                alt: ""
+                              }
+                            })
+                          ]
+                        )
                       ])
-                    ]
-                  )
+                    ])
+                  ])
                 ]
           ],
           2

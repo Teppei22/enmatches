@@ -114,7 +114,8 @@ table {
 .c-badge--msg {
   width: 30px;
   height: 30px;
-  margin-left: 10px; }
+  margin-left: 10px;
+  flex-shrink: 0; }
 
 .c-badge--chat {
   width: 46px;
@@ -361,7 +362,8 @@ table {
   text-align: center;
   background: #7bb6e6;
   z-index: 5;
-  font-size: 15px; }
+  font-size: 15px;
+  top: 130px; }
 
 .c-icon {
   display: flex;
@@ -434,6 +436,9 @@ table {
 
 .c-message__date {
   font-size: .5em;
+  height: 100%;
+  line-height: 100%;
+  vertical-align: bottom;
   margin: auto 5px 0 5px; }
 
 .c-message__form {
@@ -494,7 +499,8 @@ table {
       display: inline-block;
       width: 40px;
       height: 32px;
-      position: relative; }
+      position: relative;
+      margin-left: auto; }
       @media screen and (min-width: 768px) {
         .c-nav__menu__triger {
           display: none; } }
@@ -654,6 +660,10 @@ table {
   display: flex;
   justify-content: space-between;
   align-items: center; }
+  .c-work__status__user {
+    display: flex;
+    align-items: center;
+    line-height: 30px; }
   .c-work__status__date {
     margin-left: auto;
     font-size: 12px;
@@ -747,7 +757,8 @@ table {
   width: 100%;
   height: 45px;
   padding: 10px 16px;
-  font-size: 20px; }
+  font-size: 20px;
+  overflow-wrap: break-word; }
   .p-form__input--text-show {
     text-align: center;
     font-weight: bold; }
@@ -905,6 +916,9 @@ table {
     padding-left: 15px;
     display: block; }
 
+.p-register__header {
+  line-height: 1.3; }
+
 .p-register__contents {
   background: #fff;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
@@ -912,7 +926,6 @@ table {
 .p-top-hero {
   background-image: url(../images/hero.jpg);
   display: flex;
-  justify-content: center;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -920,7 +933,8 @@ table {
   position: relative; }
   .p-top-hero__heading {
     position: absolute;
-    top: 90px; }
+    top: 90px;
+    left: 15%; }
     .p-top-hero__heading__worktype {
       margin: 20px auto;
       width: 230px;

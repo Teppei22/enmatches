@@ -5,23 +5,22 @@
 @section('content')
 <div class="p-register">
     <div class="p-register__container l-container">
-        <div class="p-register__header l-container__header"><h1>{{ $user->name }}{{ __("'s ") }}{{ __('Profile') }}</h1></div>
+        <div class="p-register__header l-container__header"><h1>{{ $user->name }}{{ __("'s ") }}<br>{{ __('Profile') }}</h1></div>
         <div class="p-register__contents">
             <div class="p-form__section">
                 <div class="p-form__section__contents">
 
                   <div class="p-form__item">
 
-                      <div class="p-form__content">
+                    <div class="p-form__content">
 
-                          <label for="thumbnail" class="p-form__content--img">
-                              <input type="hidden" name="MAX_FILE_SIZE" value="3145728">
-                              <img class="p-form__input--prev-img" 
-                              src="@if(!empty($user->thumbnail)){{ $user->thumbnail }}@else{{ asset("images/default_user.jpg") }}@endif">
-                              
-                          </label>
+                        <label for="thumbnail" class="p-form__content--img">
+                        <img class="p-form__input--prev-img" 
+                        src="@if(!empty($user->thumbnail)){{ $user->thumbnail }}@else{{ asset("images/default_user.jpg") }}@endif">
+                            
+                        </label>
 
-                      </div>
+                    </div>
                       
                   </div>
                   

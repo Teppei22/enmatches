@@ -8,9 +8,10 @@
 <div class="l-container--wrapper">
   <section class="p-top-hero">
     <div class="p-top-hero__heading">
-
+      
       <span class="p-top-hero__heading__worktype">HP・デザイン・システム開発</span>
       <h2 class="p-top-hero__heading__title">お気軽に<br>発注・受注できます</h2>
+      
     </div>
   </section>
 

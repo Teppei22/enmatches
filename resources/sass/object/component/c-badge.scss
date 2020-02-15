@@ -11,6 +11,7 @@
   &--msg{
     @include badge-width_height($value--msg);
     margin-left: 10px;
+    flex-shrink: 0;
   }
   &--chat{
     @include badge-width_height($value--chat);

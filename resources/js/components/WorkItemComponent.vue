@@ -36,7 +36,7 @@
           </template>
 
           <template v-else>
-            <div style="display:flex;line-height:30px;">
+            <div class="c-work__status__user">
               {{ work.post_user.name }}
               <div class="c-badge--msg">
                 <div class="c-badge__content--msg">

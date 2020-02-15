@@ -2,7 +2,7 @@
   &-hero{
     background-image: url(../images/hero.jpg);
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -11,6 +11,7 @@
     &__heading{
       position: absolute;
       top: 90px;
+      left: 15%;
       &__worktype{
         margin: 20px auto;
         width: 230px;

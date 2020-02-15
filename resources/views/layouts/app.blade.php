@@ -41,6 +41,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <script>window.Promise || document.write('<script src="//www.promisejs.org/polyfills/promise-7.0.4.min.js"><\/script>');</script>
+    <script>window.Promise || document.write('<script src="/js/promise-7.0.4.min.js"><\/script>');</script>
+    
 </head>
 <body>
     <header class="p-header">
