@@ -17,7 +17,7 @@
     </div>
     
     <h1 class="p-message__title">
-      <a href="{{ route('works.show',$work->id) }}">案件 「{{ $work->title }}」</a>
+      <a href="{{ route('works.show',$work->id) }}">案件 <br>「{{ $work->title }}」</a>
     </h1>
   </div>
   <div class="l-container__header">

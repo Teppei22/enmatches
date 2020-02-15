@@ -1460,6 +1460,19 @@ exports["default"] = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   props: ['self_user', 'posted_works', 'applied_works'],
   data: function data() {
@@ -1467,8 +1480,8 @@ var _default = {
       partner_user_id: null,
       message_type: null,
       total_works: {
-        "applied": this.$props.applied_works,
-        "posted": this.$props.posted_works
+        "posted": this.$props.posted_works,
+        "applied": this.$props.applied_works
       },
       work: {}
     };
@@ -25868,55 +25881,44 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "c-chat" }, [
-    _c(
-      "div",
-      { ref: "list", staticClass: "c-chat__list" },
-      _vm._l(_vm.total_works, function(works, index) {
-        return _c(
-          "section",
-          { key: index },
-          [
-            _c(
-              "div",
-              { staticClass: "c-chat__work-type" },
-              [
-                index === "posted"
-                  ? [_vm._v("投稿案件")]
-                  : index === "applied"
-                  ? [_vm._v("応募案件")]
-                  : _vm._e()
-              ],
-              2
-            ),
-            _vm._v(" "),
-            !works.length
-              ? _c(
-                  "section",
-                  { staticClass: "c-chat__work--not-found" },
+    _c("div", { ref: "list", staticClass: "c-chat__list" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "c-tab__content js-tab_panels" },
+        _vm._l(_vm.total_works, function(works, index) {
+          return _c(
+            "ul",
+            {
+              key: index,
+              staticClass: "c-tab__panel js-tab_panel",
+              class: { "is-active": index === "posted" }
+            },
+            [
+              !works.length
+                ? _c(
+                    "li",
+                    { staticClass: "c-chat__work--not-found" },
+                    [
+                      index === "posted"
+                        ? [_vm._v("登録された案件はありません")]
+                        : index === "applied"
+                        ? [_vm._v("応募した案件はありません")]
+                        : _vm._e()
+                    ],
+                    2
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(works, function(work) {
+                return _c(
+                  "li",
+                  { key: work.id, staticClass: "c-chat__work-wrapper" },
                   [
-                    index === "posted"
-                      ? [_vm._v("登録された案件はありません")]
-                      : index === "applied"
-                      ? [_vm._v("応募した案件はありません")]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._l(works, function(work) {
-              return _c(
-                "section",
-                { key: work.id, staticClass: "c-chat__work-wrapper" },
-                [
-                  _c("section", [
                     _c("div", { staticClass: "c-chat__work__title" }, [
                       _c("a", { attrs: { href: "/works/" + work.id } }, [
-                        _vm._v(
-                          "\n              " +
-                            _vm._s(work.title) +
-                            "\n            "
-                        )
+                        _vm._v(_vm._s(work.title))
                       ])
                     ]),
                     _vm._v(" "),
@@ -25977,250 +25979,282 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("p", { staticClass: "c-chat__msg" }, [
                                     _vm._v(
-                                      "\n                      " +
+                                      "\n                    " +
                                         _vm._s(
                                           work.public_latest_message.text
                                         ) +
-                                        "\n                    "
+                                        "\n                  "
                                     )
                                   ])
                                 ]),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "c-chat__date" }, [
                                   _vm._v(
-                                    "\n                    " +
+                                    "\n                  " +
                                       _vm._s(
                                         work.public_latest_message.created_at
                                       ) +
-                                      "\n                  "
+                                      "\n                "
                                   )
                                 ])
                               ])
                             : _vm._e()
                         ]
                       )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "section",
-                    [
-                      _c("div", { staticClass: "c-chat__msg-type" }, [
-                        _vm._v("\n            ダイレクトメッセージ\n          ")
-                      ]),
-                      _vm._v(" "),
-                      index === "posted" && !work.apply_users.length
-                        ? _c(
-                            "div",
-                            { staticClass: "c-chat__item--not-found" },
-                            [
-                              _vm._v(
-                                "\n            まだ応募者がいません\n          "
-                              )
-                            ]
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "section",
+                      { staticClass: "c-chat__work-contents" },
+                      [
+                        _c("div", { staticClass: "c-chat__msg-type" }, [
+                          _vm._v(
+                            "\n              ダイレクトメッセージ\n            "
                           )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      index === "posted" && work.apply_users.length
-                        ? _vm._l(work.apply_users, function(user) {
-                            return _c(
-                              "section",
-                              {
-                                key: user.id,
-                                staticClass: "c-chat__work-contents"
-                              },
+                        ]),
+                        _vm._v(" "),
+                        index === "posted" && !work.apply_users.length
+                          ? _c(
+                              "div",
+                              { staticClass: "c-chat__item--not-found" },
                               [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "c-chat__item",
-                                    attrs: {
-                                      href:
-                                        "/message/direct?w=" +
-                                        work.id +
-                                        "&u=" +
-                                        user.id
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "c-badge--chat" },
-                                      [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "c-badge__content--chat"
-                                          },
-                                          [
-                                            _c("img", {
-                                              class:
-                                                "c-badge__img js-getImg" +
-                                                user.id,
-                                              attrs: {
-                                                src: _vm.showImage(user),
-                                                alt: ""
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "c-chat__text" }, [
+                                _vm._v(
+                                  "\n              まだ応募者がいません\n            "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        index === "posted" && work.apply_users.length
+                          ? _vm._l(work.apply_users, function(user) {
+                              return _c(
+                                "section",
+                                {
+                                  key: user.id,
+                                  staticClass: "c-chat__work-contents"
+                                },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "c-chat__item",
+                                      attrs: {
+                                        href:
+                                          "/message/direct?w=" +
+                                          work.id +
+                                          "&u=" +
+                                          user.id
+                                      }
+                                    },
+                                    [
                                       _c(
                                         "div",
-                                        { staticClass: "c-chat__name" },
-                                        [_vm._v(_vm._s(user.name))]
+                                        { staticClass: "c-badge--chat" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "c-badge__content--chat"
+                                            },
+                                            [
+                                              _c("img", {
+                                                class:
+                                                  "c-badge__img js-getImg" +
+                                                  user.id,
+                                                attrs: {
+                                                  src: _vm.showImage(user),
+                                                  alt: ""
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "c-chat__text" },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "c-chat__name" },
+                                            [_vm._v(_vm._s(user.name))]
+                                          ),
+                                          _vm._v(" "),
+                                          user.direct_latest_message
+                                            ? _c(
+                                                "p",
+                                                { staticClass: "c-chat__msg" },
+                                                [
+                                                  _vm._v(
+                                                    "\n                      " +
+                                                      _vm._s(
+                                                        user
+                                                          .direct_latest_message
+                                                          .text
+                                                      ) +
+                                                      "\n                    "
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       user.direct_latest_message
                                         ? _c(
-                                            "p",
-                                            { staticClass: "c-chat__msg" },
+                                            "div",
+                                            { staticClass: "c-chat__date" },
                                             [
                                               _vm._v(
                                                 "\n                    " +
                                                   _vm._s(
                                                     user.direct_latest_message
-                                                      .text
+                                                      .created_at
                                                   ) +
                                                   "\n                  "
                                               )
                                             ]
                                           )
                                         : _vm._e()
-                                    ]),
-                                    _vm._v(" "),
-                                    user.direct_latest_message
-                                      ? _c(
-                                          "div",
-                                          { staticClass: "c-chat__date" },
-                                          [
-                                            _vm._v(
-                                              "\n                  " +
-                                                _vm._s(
-                                                  user.direct_latest_message
-                                                    .created_at
-                                                ) +
-                                                "\n                "
-                                            )
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  ]
-                                )
-                              ]
-                            )
-                          })
-                        : index === "applied"
-                        ? [
-                            _c(
-                              "section",
-                              { staticClass: "c-chat__work-contents" },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "c-chat__item",
-                                    attrs: {
-                                      href:
-                                        "/message/direct?w=" +
-                                        work.id +
-                                        "&u=" +
-                                        work.user_id
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "c-badge--chat" },
-                                      [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "c-badge__content--chat"
-                                          },
-                                          [
-                                            _c("img", {
-                                              class:
-                                                "c-badge__img js-getImg" +
-                                                work.user_id,
-                                              attrs: {
-                                                src: _vm.showImage(
-                                                  work.post_user
-                                                )
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "c-chat__text" }, [
+                                    ]
+                                  )
+                                ]
+                              )
+                            })
+                          : index === "applied"
+                          ? [
+                              _c(
+                                "section",
+                                { staticClass: "c-chat__work-contents" },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "c-chat__item",
+                                      attrs: {
+                                        href:
+                                          "/message/direct?w=" +
+                                          work.id +
+                                          "&u=" +
+                                          work.user_id
+                                      }
+                                    },
+                                    [
                                       _c(
                                         "div",
-                                        { staticClass: "c-chat__name" },
-                                        [_vm._v(_vm._s(work.post_user.name))]
+                                        { staticClass: "c-badge--chat" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "c-badge__content--chat"
+                                            },
+                                            [
+                                              _c("img", {
+                                                class:
+                                                  "c-badge__img js-getImg" +
+                                                  work.user_id,
+                                                attrs: {
+                                                  src: _vm.showImage(
+                                                    work.post_user
+                                                  )
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "c-chat__text" },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "c-chat__name" },
+                                            [
+                                              _vm._v(
+                                                _vm._s(work.post_user.name)
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          work.direct_latest_message
+                                            ? _c(
+                                                "p",
+                                                { staticClass: "c-chat__msg" },
+                                                [
+                                                  _vm._v(
+                                                    "\n                        " +
+                                                      _vm._s(
+                                                        work
+                                                          .direct_latest_message
+                                                          .text
+                                                      ) +
+                                                      "\n                      "
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       work.direct_latest_message
                                         ? _c(
-                                            "p",
-                                            { staticClass: "c-chat__msg" },
+                                            "div",
+                                            { staticClass: "c-chat__date" },
                                             [
                                               _vm._v(
                                                 "\n                      " +
                                                   _vm._s(
                                                     work.direct_latest_message
-                                                      .text
+                                                      .created_at
                                                   ) +
                                                   "\n                    "
                                               )
                                             ]
                                           )
                                         : _vm._e()
-                                    ]),
-                                    _vm._v(" "),
-                                    work.direct_latest_message
-                                      ? _c(
-                                          "div",
-                                          { staticClass: "c-chat__date" },
-                                          [
-                                            _vm._v(
-                                              "\n                    " +
-                                                _vm._s(
-                                                  work.direct_latest_message
-                                                    .created_at
-                                                ) +
-                                                "\n                  "
-                                            )
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  ]
-                                )
-                              ]
-                            )
-                          ]
-                        : _vm._e()
-                    ],
-                    2
-                  )
-                ]
-              )
-            })
-          ],
-          2
-        )
-      }),
-      0
-    )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          : _vm._e()
+                      ],
+                      2
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        }),
+        0
+      )
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "c-tab js-tab_labels" }, [
+      _c("li", { staticClass: "js-tab_label c-tab__label is-active" }, [
+        _c("h3", [_vm._v("登録案件")])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "js-tab_label c-tab__label" }, [
+        _c("h3", [_vm._v("応募案件")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
