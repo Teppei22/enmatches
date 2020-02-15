@@ -768,7 +768,8 @@ table {
   min-height: 150px;
   padding: 10px 16px;
   font-size: 16px;
-  line-height: 1.2; }
+  line-height: 1.2;
+  overflow-wrap: break-word; }
   .p-form__input--textarea-show {
     border: 3px #777676 solid; }
     .p-form__input--textarea-show--empty {
