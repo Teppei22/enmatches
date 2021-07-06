@@ -1,6 +1,7 @@
 # エンジニア案件マッチングサイト「enmatches」
 
-![overview](https://i.imgur.com/tDQdAwL.jpg)
+<img src="https://i.imgur.com/tDQdAwL.jpg" width="750px" alt="overview">
+
 
 概要をこちらのリンクでも，説明しています．
 https://www.resume.id/works/3f193f8d4efdec12
@@ -40,27 +41,28 @@ https://www.resume.id/works/3f193f8d4efdec12
 ### ログイン画面
 - ログイン項目：メールアドレス・パスワード
 
-![login](https://i.imgur.com/pzIDtbU.png)
+<img src="https://i.imgur.com/pzIDtbU.png" width="250px" alt="login">
 
 ### 会員登録画面
 
-![register user](https://i.imgur.com/dAtcGv9.png)
+<img src="https://i.imgur.com/dAtcGv9.png" width="250px" alt="register user">
 
 ### マイページ
 
-![mypage](https://i.imgur.com/4sJi6M3.jpg)
+<img src="https://i.imgur.com/4sJi6M3.jpg" width="250px" alt="mypage">
+
 
 ### 案件登録画面
 
-![register job](https://i.imgur.com/xmd3nPZ.png)
+<img src="https://i.imgur.com/xmd3nPZ.png" width="250px" alt="register job">
 
 ### 案件詳細ページ
 - 案件編集・案件削除・いいね・SNSシェア・チャット
 
-![job](https://i.imgur.com/s4piTVg.png)
+<img src="https://i.imgur.com/s4piTVg.png" width="250px" alt="job">
 
 ### 案件一覧画面
 - 検索（キーワード・種類・金額絞り込み）
 - ページネーション
 
-![job all](https://i.imgur.com/mSKm2D4.png)
+<img src="https://i.imgur.com/mSKm2D4.png" width="250px" alt="job all">
